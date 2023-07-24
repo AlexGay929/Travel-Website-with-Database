@@ -500,7 +500,7 @@ section{
 .packages .box-container .box:nth-child(10),
 .packages .box-container .box:nth-child(11),
 .packages .box-container .box:nth-child(12){
-   display: block;
+   display: inline-block;
 }
 
 .packages .box-container .box:hover .image img{
@@ -610,7 +610,7 @@ section{
         cursor: pointer;
     }
 .footer{
-   background: url(../images/footer-bg.jpg) no-repeat;
+   background: url(https://i.imgur.com/cW1gvE7.jpg) no-repeat;
    background-size: cover;
    background-position: center;
 }
