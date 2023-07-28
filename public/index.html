@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Travel Agency :: Best Agency</title>
+   <title>Travel Booking Website</title>
    <!-- swiper css link  -->
    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
    <!-- font awesome cdn link  -->
@@ -24,6 +24,7 @@
    </script>
 </head>
 <body>
+
 <!-- header section starts  -->
 <section class="header">
    <a href="index.html" class="logo"><img src="https://i.imgur.com/0f6oUVF.png"></a>
@@ -32,32 +33,99 @@
       <a href="about.html">about</a>
       <a href="package.html">package</a>
       <a href="book.html">book</a>
+      <a href="#" id="signup-button">register</a>
+      <a href="#" id="login-button">log in</a>
+
+      <div id="profileSection" class="profile-info">
+            <img id="profilePicture" src="images/Alex Gay.jpg" alt="Profile Picture">
+       </div>
+       <div class="dropdown">
+         <button onclick="toggleDropdown()" class="dropbtn" id="dropBtn">☰</button>
+         <div id="dropdownContent" class="dropdown-content">
+           <a href="#">Dashboard</a>
+           <a href="#" onclick="logout()">Log Out</a>
+         </div>
+       </div>
    </nav>
    <div id="menu-btn" class="fas fa-bars"></div>
+
+      <!-- Sign Up Modal -->
+   <div class="signup-modal" id="signup-modal">
+         <div class="modal-content">
+            <span class="close-button" id="close-button">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+               <!-- Sign up form fields go here -->
+               <label for="username">Full Name:</label>
+               <input type="text" id="fullname" name="fullname" required>
+
+               <label for="email">Email:</label>
+               <input type="email" id="email" name="email" required>
+
+               <label for="password">Password:</label>
+               <input type="password" id="password" name="password" required>
+
+               <!-- Role selection -->
+               <!-- <label for="role">Choose role:</label>
+               <select id="role" name="role">
+                  <option value="guest">Guest</option>
+                  <option value="admin">Admin</option>
+               </select> -->
+
+               <button type="submit">Sign Up</button>
+            </form>
+         </div>
+   </div>
+   <!-- End -->
+
+   <!-- Login Modal -->
+  <div class="login-modal" id="login-modal">
+      <div class="modal-content">
+         <span class="close-button" id="loginclose-button">&times;</span>
+         <h2>Log In</h2>
+         <form id="login-form">
+            <!-- Login form fields go here -->
+            <label for="email">Email:</label>
+            <input type="email" id="login-email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="login-password" name="password" required>
+<!-- 
+            <label for="login-role">Choose role:</label>
+            <select id="login-role" name="role">
+               <option value="guest">Guest</option>
+               <option value="admin">Admin</option>
+            </select> -->
+
+            <button type="submit">Log In</button>
+         </form>
+      </div>
+ </div>
+ <!-- End -->
 </section>
 <!-- header section ends -->
+
 <!-- home section starts  -->
 <section class="home">
    <div class="swiper home-slider">
       <div class="swiper-wrapper">
-         <div class="swiper-slide slide" style="background-image: url(https://i.imgur.com/l3Lo7eo.jpg);">
-            <div class="content">
-               <span>SEEK, FEEL, EXPERIENCE</span>
-               <h3>Tour around the Philippines</h3>
-               <a href="package.html" class="btn">See more</a>
+         <div class="swiper-slide slide" style="background-image: url(https://i.imgur.com/l3Lo7eo.jpg)">
+            <div class="background-image">
+               <div class="content">
+                  <span class="multiple-text"></span>
+                  <a href="package.html" class="btn">See more</a>
+               </div>
             </div>
          </div>
          <div class="swiper-slide slide" style="background-image: url(https://i.imgur.com/dmf2AUU.png)">
             <div class="content">
-               <span>SEEK, FEEL, EXPERIENCE</span>
-               <h3>embrace the new destination</h3>
+               <span class="multiple-text"></span>
                <a href="package.html" class="btn">See more</a>
             </div>
          </div>
          <div class="swiper-slide slide" style="background-image: url(https://i.imgur.com/0jSCV29.jpg)">
             <div class="content">
-               <span>SEEK, FEEL, EXPERIENCE</span>
-               <h3>discover the unexplored</h3>
+               <span class="multiple-text"></span>
                <a href="package.html" class="btn">See more</a>
             </div>
          </div>
@@ -67,33 +135,34 @@
    </div>
 </section>
 <!-- home section ends -->
+
 <!-- services section starts  -->
 <section class="services">
    <h1 class="heading-title"> our services </h1>
    <div class="box-container">
       <div class="box">
          <img src="https://i.imgur.com/H0eqZPH.png" alt="">
-         <h3>tour guide</h3>
+         <h3>Tour guide</h3>
       </div>
       <div class="box">
          <img src="https://i.imgur.com/q0NkSAX.png" alt="">
-         <h3>camping</h3>
+         <h3>Camping</h3>
       </div>
       <div class="box">
          <img src="https://i.imgur.com/Xw1dLKX.png" alt="">
-         <h3>adventure</h3>
+         <h3>Adventure</h3>
       </div>
       <div class="box">
          <img src="https://i.imgur.com/QOZiFDn.png" alt="">
-         <h3>trekking</h3>
+         <h3>Trekking</h3>
       </div>
       <div class="box">
          <img src="https://i.imgur.com/H1F8mzy.png" alt="">
-         <h3>off road</h3>
+         <h3>Off road</h3>
       </div>
       <div class="box">
          <img src="https://i.imgur.com/KdbSjq4.png" alt="">
-         <h3>camp fire</h3>
+         <h3>Camp fire</h3>
       </div>
    </div>
 </section>
@@ -104,7 +173,7 @@
       <img src="https://i.imgur.com/wVZx75W.jpg" alt="">
    </div>
    <div class="content">
-      <h3>about us</h3>
+      <h3>About Us</h3>
       <p>Welcome to our travel website, your ultimate gateway to a world of exploration and adventure!
 
          At Wanderwise Voyages, we believe that traveling is not just about reaching a destination; it's about embracing the journey, connecting with new cultures, and creating unforgettable memories along the way. Whether you're an avid adventurer seeking thrilling escapades or a leisure traveler in search of relaxation and tranquility, we have the perfect travel experiences tailored to your desires.</p>
@@ -114,7 +183,7 @@
 <!-- home about section ends -->
 <!-- home packages section starts  -->
 <section class="home-packages">
-   <h1 class="heading-title"> our packages </h1>
+   <h1 class="heading-title"> Our Packages </h1>
    <div class="box-container">
       <div class="box">
          <div class="image">
@@ -135,7 +204,7 @@
             <h3>Cebu Tour Packages</h3>
             <p>Enjoy Cebu with unforgettable fun with our Cebu top selling packages!</p>
             <h2>PHP 20,900</h2>
-            <a href="book.html" class="btn">book now</a>
+            <a href="book.html" class="btn">Book Now</a>
          </div>
       </div>
       <div class="box">
@@ -146,7 +215,7 @@
             <h3>El Nido Tour Packages</h3>
             <p>Enjoy El Nido with unforgettable fun with our El Nido top selling packages!</p>
             <h2>PHP 51,900</h2>
-            <a href="book.html" class="btn">book now</a>
+            <a href="book.html" class="btn">Book Now</a>
          </div>
       </div>
    </div>
@@ -156,7 +225,7 @@
 
 
 <section class="partner">
-   <h1 class="heading-title"> our partners </h1>
+   <h1 class="heading-title"> Our Partners </h1>
    <div class="box-container">
       <div class="partner">
          <img src="https://i.imgur.com/qHnOLWZ.png" alt="">
@@ -185,7 +254,7 @@
       </div>
    </div>
    <div class="content">
-      <h3>upto 30% off</h3>
+      <h3>Up To 30% off</h3>
       <p>Welcome to the extraordinary world of Awesome Hotel Resort, a captivating paradise where luxury, adventure, and relaxation seamlessly blend to create an unforgettable escape.
 
          Nestled amidst breathtaking natural beauty, our resort offers a sanctuary of serenity, inviting you to unwind and indulge in the lap of opulence. From the moment you arrive, our warm and gracious staff will ensure every detail is taken care of, ensuring a seamless and personalized experience throughout your stay.</p>
@@ -199,37 +268,40 @@
 <section class="footer">
    <div class="box-container">
       <div class="box">
-         <h3>quick links</h3>
-         <a href="home.html"> <i class="fas fa-angle-right"></i> home</a>
-         <a href="about.html"> <i class="fas fa-angle-right"></i> about</a>
-         <a href="package.html"> <i class="fas fa-angle-right"></i> package</a>
-         <a href="book.html"> <i class="fas fa-angle-right"></i> book</a>
+         <h3>Quick Links</h3>
+         <a href="home.html"> <i class="fas fa-angle-right"></i> Home</a>
+         <a href="about.html"> <i class="fas fa-angle-right"></i> About</a>
+         <a href="package.html"> <i class="fas fa-angle-right"></i> Package</a>
+         <a href="book.html"> <i class="fas fa-angle-right"></i> Book</a>
       </div>
       <div class="box">
-         <h3>extra links</h3>
-         <a href="#"> <i class="fas fa-angle-right"></i> about us</a>
-         <a href="#"> <i class="fas fa-angle-right"></i> ask questions</a>
-         <a href="#"> <i class="fas fa-angle-right"></i> terms of use</a>
-         <a href="#"> <i class="fas fa-angle-right"></i> privacy policy</a>
+         <h3>Extra Links</h3>
+         <a href="#"> <i class="fas fa-angle-right"></i> About Us</a>
+         <a href="#"> <i class="fas fa-angle-right"></i> Ask Questions</a>
+         <a href="#"> <i class="fas fa-angle-right"></i> Terms of Use</a>
+         <a href="#"> <i class="fas fa-angle-right"></i> Privacy Policy</a>
       </div>
       <div class="box">
-         <h3>contact info</h3>
+         <h3>Contact Info</h3>
          <a href="#"> <i class="fas fa-phone"></i> +639317290210 </a>
          <a href="#"> <i class="fas fa-phone"></i> +639317290210 </a>
          <a href="#"> <i class="fas fa-envelope"></i> alexgay27753@gmail.com </a>
          <a href="#"> <i class="fas fa-map"></i> Matalom, Philippines  </a>
       </div>
       <div class="box">
-         <h3>follow us</h3>
-         <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
-         <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
-         <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
-         <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+         <h3>Follow Us</h3>
+         <a href="#"> <i class="fab fa-linkedin"></i> Linkedin </a>
+         <a href="#"> <i class="fab fa-facebook-f"></i> Facebook </a>
+         <a href="#"> <i class="fab fa-instagram"></i> Instagram </a>
+         <a href="#"> <i class="fab fa-twitter"></i> Twitter </a>
       </div>
    </div>
-   <div class="credit"> designed by <span>Alex Gay</span> | all rights reserved! </div>
+   <div class="credit"> designed by <span>Alex Gay</span> | All Rights Reserved! </div>
 </section>
 <!-- footer section ends -->
+
+ <!-- typed js -->
+ <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 
 <!-- scroll reveal -->
 <script src="https://unpkg.com/scrollreveal"></script>
