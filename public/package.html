@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Travel Booking Website</title>
+   <title>Wanderwise Voyages</title>
 
    <!-- swiper css link  -->
    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
@@ -14,6 +14,16 @@
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
+
+    <!-- favicon -->
+
+    <!-- Add the favicon link -->
+   <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 
    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
    <script>
@@ -41,10 +51,54 @@
       <a href="about.html">about</a>
       <a href="package.html" class="active">package</a>
       <a href="book.html">book</a>
+      <a href="#" id="signup-button">register</a>
+      <a href="#" id="login-button">log in</a>
    </nav>
 
    <div id="menu-btn" class="fas fa-bars"></div>
+                           <!-- Sign Up Modal -->
+            <div class="signup-modal" id="signup-modal">
+               <div class="modal-content">
+                  <span class="close-button" id="close-button">&times;</span>
+                  <h2>Sign Up</h2>
+                  <form id="signup-form">
+                     <!-- Sign up form fields go here -->
+                     <label for="signupFullname">Full Name:</label>
+                     <input type="text" id="signupFullname" name="signupFullname" required>
 
+                     <label for="signupEmail">Email:</label>
+                     <input type="email" id="signupEmail" name="signupEmail" required>
+
+                     <label for="signupPassword">Password:</label>
+                     <input type="password" id="signupPassword" name="signupPassword" required>
+
+                     <p>Log in, if already have an account.</p>
+
+                     <button type="submit">Sign Up</button>
+                  </form>
+               </div>
+         </div>
+         <!-- End -->
+
+         <!-- Login Modal -->
+         <div class="login-modal" id="login-modal">
+            <div class="modal-content">
+               <span class="close-button" id="loginclose-button">&times;</span>
+               <h2>Log In</h2>
+               <form id="login-form">
+                  <!-- Login form fields go here -->
+                  <label for="email">Email:</label>
+                  <input type="email" id="login-email" name="email" required>
+
+                  <label for="password">Password:</label>
+                  <input type="password" id="login-password" name="password" required>
+
+                  <p>Don't have an account? Register first.</p>
+                  
+                  <button type="submit">Log In</button>
+               </form>
+            </div>
+         </div>
 </section>
 
 <!-- header section ends -->
