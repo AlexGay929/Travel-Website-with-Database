@@ -4,6 +4,7 @@ var mongoose = require('mongoose')
 var favicon = require('serve-favicon')
 var path = require('path')
 var cookieParser = require('cookie-parser')
+const session = require('express-session');
 
 const app = express()
 const port1 = 3000; // First port (for frontend)
@@ -15,7 +16,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(favicon(path.join(__dirname, 'public', 'favicon-32x32.png')));
+// // Middleware to parse form data and set up session
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'AmariKanoahGay0616', // Change this to a secure secret
+  resave: false,
+  saveUninitialized: true
+}));
 
 // Home Route
 app.get('/', (req, res) => {
@@ -129,16 +136,88 @@ const Form1Schema = new mongoose.Schema({
              return res.redirect('/signupsuccess.html')
         });
 
-  app.get("/", (req, res)=> {
-    res.set({
-        "Allow-access-Allow-origin": '*'
-    })
-    return res.redirect('index.html')
-})
+   app.get("/", (req, res)=> {
+     res.set({
+         "Allow-access-Allow-origin": '*'
+     })
+     return res.redirect('index.html')
+ })
 
 app.listen(port1, () => {
     console.log(`Frontend server is listening on port ${3000}`);
   });
+
+
+  // Endpoint to get the login status
+app.get('/api/login-status', (req, res) => {
+    res.json({ isLoggedIn: req.session.isLoggedIn || false });
+  });
+  
   
 
+app.post("/login", (request, response)=>{
+    try{
+        // get data from index.html form
+
+        const loginEmail = request.body.loginEmail;
+        const loginPassword = request.body.loginPassword;
+
+        // lets check it
+        // data post success
+
+        // get data from database
+        const usermail = db.collection('signupformdatas').findOne({ email: loginEmail }, (err, res) => {
+            if (err) {
+              throw err;
+            }
+          
+            if (!res) {
+              // The user with the specified email was not found.
+              response.send("Information Invalid. Please create an account first");
+            } else {
+              // User found, now check the password.
+              if (res.password === loginPassword) {
+                request.session.isLoggedIn = true;
+                console.log("Login Successful!");
+                response.redirect("/loginsuccess.html");
+              } else {
+                console.log("Password does not match");
+                response.send("Password does not match");
+              }
+            }
+          });
+          
+     }catch(error){
+
+        console.log("Invalid Information");
+     }
+})
+
+// Assuming you have already set up the express and express-session middleware.
+
+// Function to destroy a session
+function destroySession(req, res) {
+    if (req.session) {
+      req.session.destroy((err) => {
+        if (err) {
+          console.error('Error destroying session:', err);
+          return res.status(500).send('Error destroying session');
+        }
+  
+        // Session is destroyed successfully
+        // Redirect the user to the desired page (e.g., the home page or login page)
+        res.redirect('/');
+      });
+    } else {
+      // If there is no session, nothing to destroy
+      // Redirect the user to the desired page (e.g., the home page or login page)
+      res.redirect('/');
+    }
+  }
+  
+  // Example route to handle session destruction (e.g., in a logout route)
+  app.post('/logout', (req, res) => {
+    destroySession(req, res);
+    console.log('Session destroyed');
+  });
   

@@ -44,15 +44,16 @@
 
 <section class="header">
 
-   <a href="index.html" class="logo"><img src="https://i.imgur.com/0f6oUVF.png"></a>
+   <a href="index.html" class="logo"><img src="https://i.imgur.com/SJSvHEe.png"></a>
 
    <nav class="navbar">
       <a href="index.html">home</a>
       <a href="about.html">about</a>
       <a href="package.html" class="active">package</a>
       <a href="book.html">book</a>
-      <a href="#" id="signup-button">register</a>
-      <a href="#" id="login-button">log in</a>
+      <a href="#" id="signupButton">register</a>
+      <a href="#" id="loginButton">log in</a>
+      <div id="profileSettings"></div>
    </nav>
 
    <div id="menu-btn" class="fas fa-bars"></div>
@@ -61,7 +62,7 @@
                <div class="modal-content">
                   <span class="close-button" id="close-button">&times;</span>
                   <h2>Sign Up</h2>
-                  <form id="signup-form">
+                  <form id="signupForm" action="/sign_up" method="POST">
                      <!-- Sign up form fields go here -->
                      <label for="signupFullname">Full Name:</label>
                      <input type="text" id="signupFullname" name="signupFullname" required>
@@ -85,7 +86,7 @@
             <div class="modal-content">
                <span class="close-button" id="loginclose-button">&times;</span>
                <h2>Log In</h2>
-               <form id="login-form">
+               <form id="loginForm" action="/login" method="POST">
                   <!-- Login form fields go here -->
                   <label for="email">Email:</label>
                   <input type="email" id="login-email" name="email" required>
@@ -99,6 +100,19 @@
                </form>
             </div>
          </div>
+
+            <!-- The logout modal -->
+         <div class="logoutModal" id="logoutModal">
+            <div class="modal-content">
+               <img src="https://i.imgur.com/SJSvHEe.png" alt="" srcset="">
+               <form id="logoutForm" action="/logout" method="POST">
+                  <span class="close" id="closelogoutModal">&times;</span>
+                  <p>Are you sure you want to log out?</p>
+                  <button id="confirmLogout">Log Out</button>
+               </form>
+            </div>
+         </div>
+         <!-- End -->
 </section>
 
 <!-- header section ends -->

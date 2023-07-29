@@ -11,14 +11,6 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
-   <!-- favicon -->
-    <!-- Add the favicon link -->
-   <!-- <link rel="icon" href="/public/favicon.ico" type="image/x-icon">
-   
-   <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
-   <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png">
-   <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
-   <link rel="manifest" href="/public/site.webmanifest">  -->
 
    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
    <script>
@@ -36,25 +28,16 @@
 
 <!-- header section starts  -->
 <section class="header">
-   <a href="index.html" class="logo"><img src="https://i.imgur.com/0f6oUVF.png"></a>
+   <a href="index.html" class="logo"><img src="https://i.imgur.com/SJSvHEe.png"></a>
    <nav class="navbar">
       <a href="index.html" class="active">home</a>
       <a href="about.html">about</a>
       <a href="package.html">package</a>
       <a href="book.html">book</a>
-      <a href="#" id="signup-button">register</a>
-      <a href="#" id="login-button">log in</a>
-
-      <!-- <div id="profileSection" class="profile-info">
-            <img id="profilePicture" src="images/Alex Gay.jpg" alt="Profile Picture">
-       </div>
-       <div class="dropdown">
-         <button onclick="toggleDropdown()" class="dropbtn" id="dropBtn">☰</button>
-         <div id="dropdownContent" class="dropdown-content">
-           <a href="#">Dashboard</a>
-           <a href="#" onclick="logout()">Log Out</a>
-         </div>
-       </div> -->
+      <a href="#" id="signupButton">register</a>
+      <a href="#" id="loginButton">log in</a>
+      <!-- <a href="#" id="logoutButton">log out</a> -->
+      <div id="profileSettings"></div>
    </nav>
    <div id="menu-btn" class="fas fa-bars"></div>
 
@@ -63,7 +46,7 @@
          <div class="modal-content">
             <span class="close-button" id="close-button">&times;</span>
             <h2>Sign Up</h2>
-            <form id="signup-form" action="/sign_up" method="POST">
+            <form id="signupForm" action="/sign_up" method="POST">
                <!-- Sign up form fields go here -->
                <label for="signupFullname">Full Name:</label>
                <input type="text" id="signupFullname" name="signupFullname" required>
@@ -87,19 +70,31 @@
       <div class="modal-content">
          <span class="close-button" id="loginclose-button">&times;</span>
          <h2>Log In</h2>
-         <form id="login-form">
+         <form id="loginForm" action="/login" method="POST">
             <!-- Login form fields go here -->
-            <label for="email">Email:</label>
-            <input type="email" id="login-email" name="email" required>
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" name="loginEmail" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="login-password" name="password" required>
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="loginPassword" required>
 
             <p>Don't have an account? Register first.</p>
-            
+
             <button type="submit">Log In</button>
          </form>
       </div>
+ </div>
+ 
+   <!-- The logout modal -->
+  <div class="logoutModal" id="logoutModal">
+   <div class="modal-content">
+      <img src="https://i.imgur.com/SJSvHEe.png" alt="" srcset="">
+      <form id="logoutForm" action="/logout" method="POST">
+         <span class="close" id="closelogoutModal">&times;</span>
+         <p>Are you sure you want to log out?</p>
+         <button id="confirmLogout">Log Out</button>
+      </form>
+   </div>
  </div>
  <!-- End -->
 </section>
@@ -167,6 +162,7 @@
    </div>
 </section>
 <!-- services section ends -->
+
 <!-- home about section starts  -->
 <section class="home-about">
    <div class="image">
@@ -181,6 +177,7 @@
    </div>
 </section>
 <!-- home about section ends -->
+
 <!-- home packages section starts  -->
 <section class="home-packages">
    <h1 class="heading-title"> Our Packages </h1>
@@ -223,7 +220,7 @@
 </section>
 <!-- home packages section ends -->
 
-
+<!-- partners section -->
 <section class="partner">
    <h1 class="heading-title"> Our Partners </h1>
    <div class="box-container">
@@ -244,13 +241,13 @@
       </div>
    </div>
 </section>
-
+<!-- End -->
 
 <!-- home offer section starts  -->
 <section class="home-offer home-packages">
    <div class="content">
       <div class="offerimage">
-      <img src="https://i.imgur.com/ZsmoepW.jpg">
+      <img src="https://i.imgur.com/hLMLyTY.jpg">
       </div>
    </div>
    <div class="content">

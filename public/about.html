@@ -44,15 +44,16 @@
 
 <section class="header">
 
-   <a href="index.html" class="logo"><img src="https://i.imgur.com/0f6oUVF.png"></a>
+   <a href="index.html" class="logo"><img src="https://i.imgur.com/SJSvHEe.png"></a>
 
    <nav class="navbar">
       <a href="index.html">home</a>
       <a href="about.html" class="active">about</a>
       <a href="package.html">package</a>
       <a href="book.html">book</a>
-      <a href="#" id="signup-button">register</a>
-      <a href="#" id="login-button">log in</a>
+      <a href="#" id="signupButton">register</a>
+      <a href="#" id="loginButton">log in</a>
+      <div id="profileSettings"></div>
    </nav>
 
    <div id="menu-btn" class="fas fa-bars"></div>
@@ -62,7 +63,7 @@
             <div class="modal-content">
                <span class="close-button" id="close-button">&times;</span>
                <h2>Sign Up</h2>
-               <form id="signup-form">
+               <form id="signupForm" action="/sign_up" method="POST">
                   <!-- Sign up form fields go here -->
                   <label for="signupFullname">Full Name:</label>
                   <input type="text" id="signupFullname" name="signupFullname" required>
@@ -86,7 +87,7 @@
          <div class="modal-content">
             <span class="close-button" id="loginclose-button">&times;</span>
             <h2>Log In</h2>
-            <form id="login-form">
+            <form id="loginForm" action="/login" method="POST">
                <!-- Login form fields go here -->
                <label for="email">Email:</label>
                <input type="email" id="login-email" name="email" required>
@@ -100,6 +101,18 @@
             </form>
          </div>
       </div>
+         <!-- The logout modal -->
+      <div class="logoutModal" id="logoutModal">
+         <div class="modal-content">
+            <img src="https://i.imgur.com/SJSvHEe.png" alt="" srcset="">
+            <form id="logoutForm" action="/logout" method="POST">
+               <span class="close" id="closelogoutModal">&times;</span>
+               <p>Are you sure you want to log out?</p>
+               <button id="confirmLogout">Log Out</button>
+            </form>
+         </div>
+      </div>
+ <!-- End -->
 
 </section>
 
@@ -119,20 +132,23 @@
 
    <div class="content">
       <h3>Why Choose Us?</h3>
-      <p>Wanderwise Voyages is the Best tour Operator and Travel agent in the Philippines. We have Tour Packages and Hotel bookings. Find tour packages in the Philippines at low prices including best ... Travel Package | Honeymoon Package | Tour Package</p>
-      <p>Fantastic getaway. Very good communication skills. Friendly and Easy to deal with.</p>
+      <p>At Wanderwise Voyages, we are passionate about curating exceptional journeys that cater to every wanderlust soul. With years of expertise in the travel industry, we take pride in offering a wide range of meticulously crafted travel packages to some of the most enchanting destinations around the Philippines.
+
+         Our mission is to turn your travel dreams into reality, creating memories that last a lifetime. Whether you're seeking an adrenaline-pumping adventure, a relaxing beach getaway, a cultural immersion, or a luxurious escapade, we have the perfect itinerary waiting for you.
+         
+         Our team of travel experts is committed to providing personalized service and attention to detail, ensuring that each aspect of your journey is seamless and stress-free. From the moment you step on board until you return home, we are dedicated to making your travel experience smooth, safe, and extraordinary.</p>
       <div class="icons-container">
          <div class="icons">
             <i class="fas fa-map"></i>
-            <span>top destinations</span>
+            <span>TOP DESTINATIONS</span>
          </div>
          <div class="icons">
             <i class="fas fa-headset"></i>
-            <span>24/7 guide service</span>
+            <span>24/7 GUIDE SERVICE</span>
          </div>
          <div class="icons">
             <i class="fas fa-hand-holding-usd"></i>
-            <span>reasonable price</span>
+            <span>REASONABLE PRICE</span>
          </div>
       </div>
    </div>
