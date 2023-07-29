@@ -133,10 +133,10 @@ function showLoggedInUI() {
   <!-- Profile Dropdown -->
   <div class="profile-dropdown">
     <!-- Image -->
-    <img src="/images/Alex Gay.jpg" alt="Profile Image" class="profile-image">
+    <img src="https://i.imgur.com/r79g1jQ.jpg" alt="Profile Image" class="profile-image">
 
     <!-- Dropdown Button -->
-    <button class="dropdown-btn" onclick="toggleDropdown()">☰</button>
+    <button class="dropdown-btn" onclick="toggleDropdown()"><i class="fas fa-bars hamburger"></i></button>
 
     <!-- Dropdown Content -->
     <div class="dropdown-content" id="dropdownContent">
@@ -181,8 +181,8 @@ function showNonLoggedInUI() {
    const signupButton = document.getElementById('signupButton');
    const loginButton = document.getElementById('loginButton');
    const profileSettings = document.getElementById('profileSettings');
-   const profileInfo = document.getElementById('profile-info');
-   profileInfo.classList.remove('show');
+  //  const profileInfo = document.getElementById('profile-info');
+  //  profileInfo.classList.remove('show');
    profileSettings.style.display = 'none';
    signupButton.style.display = 'block';
    loginButton.style.display = 'block';
@@ -222,9 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
    // Close the modal after logout
    closeLogoutModal();
  });
-
- // Event listener for the "Cancel" button in the modal
- cancelLogout.addEventListener('click', closeLogoutModal);
 
 
 

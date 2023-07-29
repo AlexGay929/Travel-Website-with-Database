@@ -121,7 +121,6 @@ section{
    left:0; 
    right:0;
    z-index: 1000;
-   /* height: 10rem; */
    background-color: var(--white);
    display: flex;
    padding-top: 0rem;
@@ -304,6 +303,7 @@ section{
  }
 
  #logoutForm p {
+   margin-top: 2rem;
    font-size: 1.2rem;
    text-align: center;
  }
@@ -319,6 +319,7 @@ section{
 
  .logoutModal .modal-content img {
    display: block;
+   width: 150px;
    margin: 0 auto;
    background-color: var(--light-bg);
  }
@@ -366,11 +367,14 @@ section{
    height: 40px;
    border-radius: 50%;
    margin: 0 20px;
+   border: 1px solid var(--light-black);
  }
  
- .dropdown-btn {
+ .profile-dropdown .dropdown-btn .hamburger {
    background-color: var(--main-color);
+   color: var(--black);
    border: none;
+   padding: 5px 10px;
    font-size: 24px;
    color: #fff;
    cursor: pointer;

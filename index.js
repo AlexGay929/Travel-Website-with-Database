@@ -24,9 +24,20 @@ app.use(session({
   saveUninitialized: true
 }));
 
+// Custom middleware to check if the user is logged in
+function requireLogin(req, res, next) {
+  if (req.session.isLoggedIn === true) {
+    return next();
+  } else {
+    return res.redirect('/'); // Redirect to the login page if not logged in
+  }
+}
+
+
 // Home Route
 app.get('/', (req, res) => {
     res.sendFile('index.html', {root: 'public'});
+    // res.send('Please log in to access the booking page.');
 })
 // About 
 app.get('/about', (req, res) => {
@@ -38,8 +49,13 @@ app.get('/package', (req, res) => {
     res.sendFile('package.html', {root: 'public'});
 })
 // Book
-app.get('/book', (req, res) => {
+app.get('/book', requireLogin, (req, res) => {
     res.sendFile('book.html', {root: 'public'});
+    // if (req.session.isLoggedIn === true) {
+    //   res.send('Welcome to the booking page!');
+    // } else {
+    //   res.send('Please log in to access the booking page.');
+    // }
 })
 
 // Connect to MongoDB (replace 'YOUR_MONGODB_URI' with your actual MongoDB connection URI)
@@ -152,8 +168,7 @@ app.listen(port1, () => {
 app.get('/api/login-status', (req, res) => {
     res.json({ isLoggedIn: req.session.isLoggedIn || false });
   });
-  
-  
+
 
 app.post("/login", (request, response)=>{
     try{
@@ -193,7 +208,6 @@ app.post("/login", (request, response)=>{
      }
 })
 
-// Assuming you have already set up the express and express-session middleware.
 
 // Function to destroy a session
 function destroySession(req, res) {
@@ -218,6 +232,6 @@ function destroySession(req, res) {
   // Example route to handle session destruction (e.g., in a logout route)
   app.post('/logout', (req, res) => {
     destroySession(req, res);
-    console.log('Session destroyed');
+    console.log('Session destroyed!');
   });
   
