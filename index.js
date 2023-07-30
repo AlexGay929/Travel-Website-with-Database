@@ -24,39 +24,30 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// Custom middleware to check if the user is logged in
-function requireLogin(req, res, next) {
-  if (req.session.isLoggedIn === true) {
+//  Middleware to check if the user is authenticated
+const isAuthenticated = (req, res, next) => {
+  if (req.session && req.session.user) {
+    // User is logged in
     return next();
-  } else {
-    return res.redirect('/'); // Redirect to the login page if not logged in
   }
-}
+  // User is not logged in, redirect to the login page
+  // res.redirect('/');
+   // Redirect to the success page with the alert JavaScript
+   return res.send(`
+   <script>
+     alert('ERROR! You need to sign up and log in before booking!');
+     window.location.href = '/';
+   </script>
+ `);
+};
+
 
 
 // Home Route
 app.get('/', (req, res) => {
     res.sendFile('index.html', {root: 'public'});
-    // res.send('Please log in to access the booking page.');
-})
-// About 
-app.get('/about', (req, res) => {
-    res.sendFile('about.html', {root: 'public'});
 })
 
-// Package
-app.get('/package', (req, res) => {
-    res.sendFile('package.html', {root: 'public'});
-})
-// Book
-app.get('/book', requireLogin, (req, res) => {
-    res.sendFile('book.html', {root: 'public'});
-    // if (req.session.isLoggedIn === true) {
-    //   res.send('Welcome to the booking page!');
-    // } else {
-    //   res.send('Please log in to access the booking page.');
-    // }
-})
 
 // Connect to MongoDB (replace 'YOUR_MONGODB_URI' with your actual MongoDB connection URI)
 mongoose.connect('mongodb+srv://alexgay929:1DsuExsvo8aX9vCX@cluster0.fsy3wif.mongodb.net/', {
@@ -97,7 +88,7 @@ const Form1Schema = new mongoose.Schema({
   const Form2Model = mongoose.model('SignupformDatas', Form2Schema);
   
   // Route to handle Formdatas
-  app.post('/bookings', (req, res) => {
+  app.post('/bookings', isAuthenticated, (req, res) => {
     var name = req.body.name;
          var email = req.body.email;
          var phone = req.body.phone;
@@ -129,9 +120,10 @@ const Form1Schema = new mongoose.Schema({
     
   });
 
+ 
   
   // Route to handle Form2 data
-  app.post('/sign_up', (req, res) => {
+  app.post('/sign_up',  (req, res) => {
     // Create a new document for Form2 data
          var signupFullname = req.body.signupFullname;
          var signupEmail = req.body.signupEmail;
@@ -170,15 +162,12 @@ app.get('/api/login-status', (req, res) => {
   });
 
 
-app.post("/login", (request, response)=>{
+app.post("/login", (request, response)=> {
     try{
         // get data from index.html form
 
         const loginEmail = request.body.loginEmail;
         const loginPassword = request.body.loginPassword;
-
-        // lets check it
-        // data post success
 
         // get data from database
         const usermail = db.collection('signupformdatas').findOne({ email: loginEmail }, (err, res) => {
@@ -192,6 +181,8 @@ app.post("/login", (request, response)=>{
             } else {
               // User found, now check the password.
               if (res.password === loginPassword) {
+                // Set the user as logged in by setting the session property
+                request.session.user = res;
                 request.session.isLoggedIn = true;
                 console.log("Login Successful!");
                 response.redirect("/loginsuccess.html");
@@ -206,6 +197,21 @@ app.post("/login", (request, response)=>{
 
         console.log("Invalid Information");
      }
+});
+
+// Book
+app.get('/book', isAuthenticated, (req, res) => {
+  res.sendFile('book.html', {root: 'public'});
+})
+
+// About 
+app.get('/about', (req, res) => {
+  res.sendFile('about.html', {root: 'public'});
+})
+
+// Package
+app.get('/package', (req, res) => {
+  res.sendFile('package.html', {root: 'public'});
 })
 
 

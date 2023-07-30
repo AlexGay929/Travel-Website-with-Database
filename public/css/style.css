@@ -120,7 +120,7 @@ section{
    top:0; 
    left:0; 
    right:0;
-   z-index: 1000;
+   z-index: 100;
    background-color: var(--white);
    display: flex;
    padding-top: 0rem;
@@ -188,6 +188,7 @@ section{
  .signup-modal h2 {
    margin-top: 0;
    font-size: 2.5rem;
+   text-align: center;
  }
  
  .signup-modal form {
@@ -267,6 +268,7 @@ section{
  .login-modal h2 {
    font-size: 2.5rem;
    margin-top: 0;
+   text-align: center;
  }
  
  .login-modal form {
@@ -377,62 +379,38 @@ section{
  }
 
  /* Profile Dropdown Styles */
-.profile-dropdown {
-   display: flex;
-   align-items: center;
+ #profile-dropdown {
    position: relative;
  }
- 
- .profile-image {
+
+ #profile-dropdown img {
    width: 40px;
    height: 40px;
    border-radius: 50%;
    margin: 0 20px;
    border: 1px solid var(--light-black);
  }
- 
- .profile-dropdown .dropdown-btn .hamburger {
-   background-color: var(--main-color);
-   color: var(--black);
-   border: none;
-   padding: 5px 10px;
-   font-size: 24px;
-   color: #fff;
-   cursor: pointer;
- }
- 
- /* Dropdown Content Styles */
- .dropdown-content {
+
+ .dropdown-menu {
    display: none;
    position: absolute;
+   align-self: center;
    top: 100%;
-   right: -20;
+   right: -50%;
+   z-index: 1001;
    background-color: var(--white);
    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
    min-width: 160px;
-   z-index: 1;
- }
- 
- .dropdown-content a {
-   color: #333;
-   padding: 12px 16px;
-   text-decoration: none;
-   display: block;
- }
- 
- .dropdown-content a:hover {
-   background-color: #f1f1f1;
- }
- 
- .show {
-   display: block;
  }
 
- /* Show the dropdown menu when hovering over the dropdown button */
-.dropdown-btn:hover + .dropdown-content,
-.dropdown-content:hover {
-  display: block;
-} 
+ .dropdown-menu li {
+   text-decoration: none;
+   list-style: none;
+ }
+
+ .dropdown-menu a:hover {
+   background-color: var(--light-black);
+ }
  
  .main-content {
    padding: 20px;
@@ -463,14 +441,6 @@ section{
    display: inline-block;
 }
 
-.home .slide .content span{
-   color: var(--tomato);
-   display: block;
-   font-size: 2.2rem;
-   padding-bottom: 1rem;
-   animation:fadeIn .2s linear backwards .2s;
-}
-
 .home .slide .content span {
    font-size: 5vw;
    color:var(--white);
@@ -478,6 +448,7 @@ section{
    line-height: 1;
    text-shadow: var(--text-shadow);
    padding:1rem 0;
+   display: block;
 }
 
 .home .slide .content .btn{
@@ -832,9 +803,10 @@ section{
 }
 
 /* Booking Form */
-.booking .book-form{
+.booking .book-form {
    padding:2rem;
    background: var(--light-bg);
+   text-align: center;
 }
 
 .booking .book-form .flex{
@@ -1080,12 +1052,15 @@ section{
 
    .header .navbar{
       position: absolute;
-      top:99%; left:0; right:0;
+      top: 99%; 
+      left: 0; 
+      right: 0;
       background-color: var(--white);
       border-top: var(--border);
-      padding:2rem;
+      padding: 2rem;
       transition: .2s linear;
       clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      height: 15rem;
    }
 
    .header .navbar.active{
@@ -1098,9 +1073,21 @@ section{
       text-align: center;
    }
 
+   .dropdown-menu {
+      top: -120%;
+      right: -30%;
+   }
+
+   .header a img {
+      margin: 1rem 0 0 1rem;
+   }
+
 }
 
 @media (max-width:630px) {
+   .header a img {
+      margin: 1rem 0 0 0;
+   }
    .header .navbar {
       position: absolute;
       top: -500px;
@@ -1113,10 +1100,17 @@ section{
       border-top: 2px solid var(--main-color);
       transition: 0.2s;
       text-align: left;
+      height: auto;
   }
   .header .navbar.active {
       top: 100%;
   }
+
+  .dropdown-menu {
+   top: -400%;
+   right: -220%;
+   }
+
   .header .navbar a {
       padding: 16px;
       display: block;
@@ -1136,4 +1130,23 @@ section{
       width: 70%;
    }
 
+   .header a img {
+      margin: 1rem 0 0 0;
+   }
+
+   .home .slide .content span {
+      font-size: 5vw;
+      color:var(--white);
+      text-transform: uppercase;
+      line-height: 1;
+      text-shadow: var(--text-shadow);
+      padding:1rem 0;
+      display: block;
+   }
+
+   .dropdown-menu {
+      top: -400%;
+      right: -200%;
+      }
+   
 }

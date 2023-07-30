@@ -130,46 +130,51 @@ function showLoggedInUI() {
   // Display the profile settings with an image
   const profileSettings = document.getElementById('profileSettings');
   profileSettings.innerHTML = `
-  <!-- Profile Dropdown -->
-  <div class="profile-dropdown">
-    <!-- Image -->
-    <img src="https://i.imgur.com/r79g1jQ.jpg" alt="Profile Image" class="profile-image">
-
-    <!-- Dropdown Button -->
-    <button class="dropdown-btn" onclick="toggleDropdown()"><i class="fas fa-bars hamburger"></i></button>
-
-    <!-- Dropdown Content -->
-    <div class="dropdown-content" id="dropdownContent">
-      <a href="#">Dashboard</a>
-      <a href="#">Settings</a>
-      <a href="#" id="logoutButton">Log Out</a>
-    </div>
-  </div>
-  `;
-
+          <div id="profile-dropdown">
+              <img src="https://i.imgur.com/r79g1jQ.jpg" class="profile-image" alt="User Profile" />
+              <ul class="dropdown-menu">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#" id="logoutButton">Logout</a></li>
+              </ul>
+        </div>
+          `;
+          document.addEventListener("click", function (event) {
+            const dropdown = document.querySelector(".dropdown-menu");
+            const profileImage = document.getElementById("profile-dropdown");
+          
+            if (!profileImage.contains(event.target)) {
+              dropdown.style.display = "none";
+            }
+          });
+          
+          document.getElementById("profile-dropdown").addEventListener("click", function () {
+            const dropdown = document.querySelector(".dropdown-menu");
+            dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+          });
 
          // Add event listener for the "Log Out" button
       const logoutButton = document.getElementById('logoutButton');
       logoutButton.addEventListener('click', showLogoutModal);
 
-        // Function to show/hide the dropdown content
-      function toggleDropdown() {
-        const dropdownContent = document.getElementById('dropdownContent');
-        dropdownContent.classList.toggle('show');
-      }
+      //   // Function to show/hide the dropdown content
+      // function toggleDropdown() {
+      //   const dropdownContent = document.getElementById('dropdownContent');
+      //   dropdownContent.classList.toggle('show');
+      // }
 
-      // Close the dropdown when clicking outside
-      window.onclick = function(event) {
-        if (!event.target.matches('.dropdown-btn')) {
-          const dropdowns = document.getElementsByClassName('dropdown-content');
-          for (let i = 0; i < dropdowns.length; i++) {
-            const openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-              openDropdown.classList.remove('show');
-            }
-          }
-        }
-      };
+      // // Close the dropdown when clicking outside
+      // window.onclick = function(event) {
+      //   if (!event.target.matches('.dropdown-btn')) {
+      //     const dropdowns = document.getElementsByClassName('dropdown-content');
+      //     for (let i = 0; i < dropdowns.length; i++) {
+      //       const openDropdown = dropdowns[i];
+      //       if (openDropdown.classList.contains('show')) {
+      //         openDropdown.classList.remove('show');
+      //       }
+      //     }
+      //   }
+      // };
 
 
 }
@@ -222,8 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
    // Close the modal after logout
    closeLogoutModal();
  });
-
-
 
  
 
