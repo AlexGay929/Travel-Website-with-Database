@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Website - Profile Page</title>
+  <!-- swiper css link  -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <!-- custom js file link  -->
+    <script src="js/profile.js" defer></script>
+    <!-- header section starts  -->
+<section class="header">
+    <a href="index.html" class="logo"><img src="https://i.imgur.com/SJSvHEe.png"></a>
+    <nav class="navbar">
+       <a href="index.html" class="active">home</a>
+       <a href="about.html">about</a>
+       <a href="package.html">package</a>
+       <a href="book.html">book</a>
+       <a href="#" id="signupButton">register</a>
+       <a href="#" id="loginButton">log in</a>
+       <!-- <a href="#" id="logoutButton">log out</a> -->
+       <div id="profileSettings"></div>
+    </nav>
+    <div id="menu-btn" class="fas fa-bars"></div>
+ 
+       <!-- Sign Up Modal -->
+    <div class="signup-modal" id="signup-modal">
+          <div class="modal-content">
+             <span class="close-button" id="close-button">&times;</span>
+             <h2>Sign Up</h2>
+             <form id="signupForm" action="/sign_up" method="POST">
+                <!-- Sign up form fields go here -->
+                <label for="signupFullname">Full Name:</label>
+                <input type="text" id="signupFullname" name="signupFullname" required>
+ 
+                <label for="signupEmail">Email:</label>
+                <input type="email" id="signupEmail" name="signupEmail" required>
+ 
+                <label for="signupPassword">Password:</label>
+                <input type="password" id="signupPassword" name="signupPassword" required>
+ 
+                <p>Log in, if already have an account.</p>
+ 
+                <button type="submit">Sign Up</button>
+             </form>
+          </div>
+    </div>
+    <!-- End -->
+ 
+    <!-- Login Modal -->
+   <div class="login-modal" id="login-modal">
+       <div class="modal-content">
+          <span class="close-button" id="loginclose-button">&times;</span>
+          <h2>Log In</h2>
+          <div class="form-container">
+             <form id="loginForm" action="/login" method="POST">
+                <!-- Login form fields go here -->
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" name="loginEmail" required>
+    
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="loginPassword" required>
+    
+                <p>Don't have an account? Register first.</p>
+    
+                <button type="submit">Log In</button>
+             </form>
+          </div>
+       </div>
+  </div>
+  
+    <!-- The logout modal -->
+   <div class="logoutModal" id="logoutModal">
+    <div class="modal-content">
+       <span class="close" id="closelogoutModal">&times;</span>
+       <img src="https://i.imgur.com/SJSvHEe.png" alt="" srcset="">
+       <form id="logoutForm" action="/logout" method="POST">
+          <p>Are you sure you want to log out?</p>
+          <button id="confirmLogout">Log Out</button>
+       </form>
+    </div>
+  </div>
+  <!-- End -->
+ </section>
+ <!-- header section ends -->
+ <section id="dashboard">
+    <h2>TRAVEL BOOKINGS</h2>
+    <div class="dashboard">
+        <div class="upcoming-trips">
+        <h3>Upcoming Trips</h3>
+        <ul id="upcomingTripsList">
+            <!-- List of upcoming trips will be dynamically populated here -->
+        </ul>
+        </div>
+    
+        <div class="recent-bookings">
+        <h3>Recent Bookings</h3>
+        <ul id="recentBookingsList">
+            <!-- List of recent bookings will be dynamically populated here -->
+        </ul>
+        </div>
+    </div>
+
+    <div class="promoImage">
+        <img src="https://i.imgur.com/fBWSnIu.png" alt="">
+    </div>
+</section>
+  <!-- footer section starts  -->
+<section class="footer">
+    <div class="box-container">
+       <div class="box">
+          <h3>Quick Links</h3>
+          <a href="home.html"> <i class="fas fa-angle-right"></i> Home</a>
+          <a href="about.html"> <i class="fas fa-angle-right"></i> About</a>
+          <a href="package.html"> <i class="fas fa-angle-right"></i> Package</a>
+          <a href="book.html"> <i class="fas fa-angle-right"></i> Book</a>
+       </div>
+       <div class="box">
+          <h3>Extra Links</h3>
+          <a href="#"> <i class="fas fa-angle-right"></i> About Us</a>
+          <a href="#"> <i class="fas fa-angle-right"></i> Ask Questions</a>
+          <a href="#"> <i class="fas fa-angle-right"></i> Terms of Use</a>
+          <a href="#"> <i class="fas fa-angle-right"></i> Privacy Policy</a>
+       </div>
+       <div class="box">
+          <h3>Contact Info</h3>
+          <a href="#"> <i class="fas fa-phone"></i> +639317290210 </a>
+          <a href="#"> <i class="fas fa-phone"></i> +639317290210 </a>
+          <a href="#"> <i class="fas fa-envelope"></i> alexgay27753@gmail.com </a>
+          <a href="#"> <i class="fas fa-map"></i> Matalom, Philippines  </a>
+       </div>
+       <div class="box">
+          <h3>Follow Us</h3>
+          <a href="#"> <i class="fab fa-linkedin"></i> Linkedin </a>
+          <a href="#"> <i class="fab fa-facebook-f"></i> Facebook </a>
+          <a href="#"> <i class="fab fa-instagram"></i> Instagram </a>
+          <a href="#"> <i class="fab fa-twitter"></i> Twitter </a>
+       </div>
+    </div>
+    <div class="credit"> designed by <span>Alex Gay</span> | All Rights Reserved! </div>
+ </section>
+ <!-- footer section ends -->
+
+   
+
+</body>
+</html>

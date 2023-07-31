@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Wanderwise Voyages</title>
+
+   <!-- swiper css link  -->
+   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+    <!-- favicon -->
+
+    <!-- Add the favicon link -->
+   <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script>
+      $(document).ready(function(){
+          $(".scroll-top").click(function() {
+              $("html, body").animate({ 
+                  scrollTop: 0 
+              }, "slow");
+              return false;
+          });
+      });
+   </script>
+
+</head>
+<body>
+   
+<!-- header section starts  -->
+
+<section class="header">
+
+   <a href="index.html" class="logo"><img src="https://i.imgur.com/SJSvHEe.png"></a>
+
+   <nav class="navbar">
+      <a href="index.html">home</a>
+      <a href="about.html">about</a>
+      <a href="package.html" class="active">package</a>
+      <a href="book.html">book</a>
+      <a href="#" id="signupButton">register</a>
+      <a href="#" id="loginButton">log in</a>
+      <div id="profileSettings"></div>
+   </nav>
+
+   <div id="menu-btn" class="fas fa-bars"></div>
+                           <!-- Sign Up Modal -->
+            <div class="signup-modal" id="signup-modal">
+               <div class="modal-content">
+                  <span class="close-button" id="close-button">&times;</span>
+                  <h2>Sign Up</h2>
+                  <form id="signupForm" action="/sign_up" method="POST">
+                     <!-- Sign up form fields go here -->
+                     <label for="signupFullname">Full Name:</label>
+                     <input type="text" id="signupFullname" name="signupFullname" required>
+
+                     <label for="signupEmail">Email:</label>
+                     <input type="email" id="signupEmail" name="signupEmail" required>
+
+                     <label for="signupPassword">Password:</label>
+                     <input type="password" id="signupPassword" name="signupPassword" required>
+
+                     <p>Log in, if already have an account.</p>
+
+                     <button type="submit">Sign Up</button>
+                  </form>
+               </div>
+         </div>
+         <!-- End -->
+
+         <!-- Login Modal -->
+         <div class="login-modal" id="login-modal">
+            <div class="modal-content">
+               <span class="close-button" id="loginclose-button">&times;</span>
+               <h2>Log In</h2>
+               <form id="loginForm" action="/login" method="POST">
+                  <!-- Login form fields go here -->
+                  <label for="email">Email:</label>
+                  <input type="email" id="login-email" name="email" required>
+
+                  <label for="password">Password:</label>
+                  <input type="password" id="login-password" name="password" required>
+
+                  <p>Don't have an account? Register first.</p>
+                  
+                  <button type="submit">Log In</button>
+               </form>
+            </div>
+         </div>
+
+            <!-- The logout modal -->
+         <div class="logoutModal" id="logoutModal">
+            <div class="modal-content">
+               <span class="close" id="closelogoutModal">&times;</span>
+               <img src="https://i.imgur.com/SJSvHEe.png" alt="" srcset="">
+               <form id="logoutForm" action="/logout" method="POST">
+                  <p>Are you sure you want to log out?</p>
+                  <button id="confirmLogout">Log Out</button>
+               </form>
+            </div>
+         </div>
+         <!-- End -->
+</section>
+
+<!-- header section ends -->
+
+<div class="heading" style="background:url(https://i.imgur.com/s5tdLoh.png) no-repeat">
+   <h1>packages</h1>
+</div>
+
+<!-- packages section starts  -->
+
+<section class="packages">
+
+   <h1 class="heading-title">Top Destinations</h1>
+
+   <div class="box-container">
+
+      <div class="box">
+         <div class="image ">
+            <img src="https://i.imgur.com/9KdBxs4.png" alt="">
+         </div>
+         <div class="content">
+            <h3>Boracay Tour Packages</h3>
+            <p>Enjoy Boracay with unforgettable fun with our Boracay top selling packages!</p>
+            <h2 class="needed">PHP 30,900</h2>
+            <a href="book.html" class="btn needed">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image ">
+            <img src="https://i.imgur.com/7UxnDnB.jpg" alt="">
+         </div>
+         <div class="content">
+            <h3>Cebu Tour Packages</h3>
+            <p>Enjoy Cebu with unforgettable fun with our Cebu top selling packages!</p>
+            <h2 class="needed">PHP 20,900</h2>
+            <a href="book.html" class="btn needed">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image ">
+            <img src="https://i.imgur.com/jDeLlSa.jpg" alt="">
+         </div>
+         <div class="content">
+            <h3>El Nido Tour Packages</h3>
+            <p>Enjoy El Nido with unforgettable fun with our El Nido top selling packages!</p>
+            <h2 class="needed">PHP 51,900</h2>
+            <a href="book.html" class="btn needed">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image">
+            <img src="https://i.imgur.com/HjUm1fL.jpg" alt="">
+         </div>
+         <div class="content">
+            <h3>Puerto Galera Tour Packages</h3>
+            <p>Enjoy Puerto Galera with unforgettable fun with our Puerto Galera top selling packages!</p>
+            <h2>PHP 23,900</h2>
+            <a href="book.html" class="btn">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image">
+            <img src="https://i.imgur.com/xG2i2bG.jpg" alt="">
+         </div>
+         <div class="content">
+            <h3>Puerto Princessa Tour Packages</h3>
+            <p>Enjoy Puerto Princessa with unforgettable fun with our Puerto Princessa top selling packages!</p>
+            <h2>PHP 27,900</h2>
+            <a href="book.html" class="btn">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image ">
+            <img src="https://i.imgur.com/NZwv7ZO.png" alt="">
+         </div>
+         <div class="content">
+            <h3>Siargao Tour Packages</h3>
+            <p>Enjoy Siargao with unforgettable fun with our Siargao top selling packages!</p>
+            <h2 class="needed">PHP 22,900</h2>
+            <a href="book.html" class="btn needed">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image ">
+            <img src="https://i.imgur.com/nRUQdIp.jpg" alt="">
+         </div>
+         <div class="content">
+            <h3>Tagaytay Tour Packages</h3>
+            <p>Enjoy Tagaytay with unforgettable fun with our Tagaytay top selling packages!</p>
+            <h2 class="needed">PHP 18,900</h2>
+            <a href="book.html" class="btn needed">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image">
+            <img src="https://i.imgur.com/5ZEWBaA.jpg" alt="">
+         </div>
+         <div class="content">
+            <h3>Tubbataha Reef Tour Packages</h3>
+            <p>Enjoy Tubbataha with unforgettable fun with our Tubbataha Reef top selling packages!</p>
+            <h2>PHP 41,900</h2>
+            <a href="book.html" class="btn">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image ">
+            <img src="https://i.imgur.com/Rx5VoS6.jpg" alt="">
+         </div>
+         <div class="content">
+            <h3>Vigan Tour Packages</h3>
+            <p>Enjoy Vigan with unforgettable fun with our Vigan top selling packages!</p>
+            <h2 class="needed">PHP 24,900</h2>
+            <a href="book.html" class="btn needed">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image ">
+            <img src="https://i.imgur.com/0fakdU1.jpg" alt="">
+         </div>
+         <div class="content">
+            <h3>Davao City Tour Packages</h3>
+            <p>Enjoy Davao City with unforgettable fun with our Davao City top selling packages!</p>
+            <h2 class="needed">PHP 27,900</h2>
+            <a href="book.html" class="btn needed">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image">
+            <img src="https://i.imgur.com/oal2NeV.jpg" alt="">
+         </div>
+         <div class="content">
+            <h3>Coron Palawan Tour Packages</h3>
+            <p>Enjoy Coron with unforgettable fun with our Coron Palawan top selling packages!</p>
+            <h2>PHP 35,900</h2>
+            <a href="book.html" class="btn">Book Now</a>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image ">
+            <img src="https://i.imgur.com/teVrZ2x.jpg" alt="">
+         </div>
+         <div class="content">
+            <h3>Camiguin Tour Packages</h3>
+            <p>Enjoy Camiguin with unforgettable fun with our Camiguin top selling packages!</p>
+            <h2 class="needed">PHP 31,900</h2>
+            <a href="book.html" class="btn needed">Book Now</a>
+         </div>
+      </div>
+
+   </div>
+
+</section>
+<!-- packages section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+   <div class="box-container">
+      <div class="box">
+         <h3>Quick Links</h3>
+         <a href="home.html"> <i class="fas fa-angle-right"></i> Home</a>
+         <a href="about.html"> <i class="fas fa-angle-right"></i> About</a>
+         <a href="package.html"> <i class="fas fa-angle-right"></i> Package</a>
+         <a href="book.html"> <i class="fas fa-angle-right"></i> Book</a>
+      </div>
+      <div class="box">
+         <h3>Extra Links</h3>
+         <a href="#"> <i class="fas fa-angle-right"></i> About Us</a>
+         <a href="#"> <i class="fas fa-angle-right"></i> Ask Questions</a>
+         <a href="#"> <i class="fas fa-angle-right"></i> Terms of Use</a>
+         <a href="#"> <i class="fas fa-angle-right"></i> Privacy Policy</a>
+      </div>
+      <div class="box">
+         <h3>Contact Info</h3>
+         <a href="#"> <i class="fas fa-phone"></i> +639317290210 </a>
+         <a href="#"> <i class="fas fa-phone"></i> +639317290210 </a>
+         <a href="#"> <i class="fas fa-envelope"></i> alexgay27753@gmail.com </a>
+         <a href="#"> <i class="fas fa-map"></i> Matalom, Philippines </a>
+      </div>
+      <div class="box">
+         <h3>Follow Us</h3>
+         <a href="#"> <i class="fab fa-linkedin"></i> Linkedin </a>
+         <a href="#"> <i class="fab fa-facebook-f"></i> Facebook </a>
+         <a href="#"> <i class="fab fa-instagram"></i> Instagram </a>
+         <a href="#"> <i class="fab fa-twitter"></i> Twitter </a>
+      </div>
+   </div>
+   <div class="credit"> designed by <span>Alex Gay</span> | All Rights Reserved! </div>
+</section>
+
+<!-- footer section ends -->
+<!-- swiper js link  -->
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script> 
+
+<!-- scroll reveal -->
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>

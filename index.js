@@ -24,15 +24,20 @@ app.use(session({
   saveUninitialized: true
 }));
 
+// Set the view engine to EJS
+app.set('view engine', 'ejs');
+// Set the views directory to the 'views' folder
+app.set('views', path.join(__dirname, 'views'));
+
+
 //  Middleware to check if the user is authenticated
 const isAuthenticated = (req, res, next) => {
   if (req.session && req.session.user) {
     // User is logged in
     return next();
   }
-  // User is not logged in, redirect to the login page
-  // res.redirect('/');
-   // Redirect to the success page with the alert JavaScript
+    // User is not logged in, redirect to the login page
+   // Redirect to the home page with the alert JavaScript
    return res.send(`
    <script>
      alert('ERROR! You need to sign up and log in before booking!');
@@ -44,9 +49,9 @@ const isAuthenticated = (req, res, next) => {
 
 
 // Home Route
-app.get('/', (req, res) => {
-    res.sendFile('index.html', {root: 'public'});
-})
+// app.get('/', (req, res) => {
+//     res.sendFile('index.html', {root: 'public'});
+// })
 
 
 // Connect to MongoDB (replace 'YOUR_MONGODB_URI' with your actual MongoDB connection URI)
@@ -199,21 +204,34 @@ app.post("/login", (request, response)=> {
      }
 });
 
-// Book
+
+app.get('/', (req, res) => {
+  res.render('index'); // Assumes there's an 'index.ejs' file in the 'views' folder
+});
+
 app.get('/book', isAuthenticated, (req, res) => {
-  res.sendFile('book.html', {root: 'public'});
-})
+  res.render('book'); // Assumes there's a 'book.ejs' file in the 'views' folder
+});
 
-// About 
 app.get('/about', (req, res) => {
-  res.sendFile('about.html', {root: 'public'});
-})
+  res.render('about'); // Assumes there's an 'about.ejs' file in the 'views' folder
+});
 
-// Package
 app.get('/package', (req, res) => {
-  res.sendFile('package.html', {root: 'public'});
-})
+  res.render('package'); // Assumes there's a 'package.ejs' file in the 'views' folder
+});
 
+/// Route for profile page (accessible only if authenticated)
+app.get('/profile', isAuthenticated, (req, res) => {
+  // Render the profile.ejs template and pass the login status and user information
+  res.render('profile', { isLoggedIn: true, password: req.session.user.password, email: req.session.user.email  });
+});
+
+/// Route for profile page (accessible only if authenticated)
+app.get('/dashboard', isAuthenticated, (req, res) => {
+  // Render the profile.ejs template and pass the login status and user information
+  res.render('dashboard', { isLoggedIn: true, password: req.session.user.password, email: req.session.user.email  });
+});
 
 // Function to destroy a session
 function destroySession(req, res) {

@@ -133,8 +133,8 @@ function showLoggedInUI() {
           <div id="profile-dropdown">
               <img src="https://i.imgur.com/r79g1jQ.jpg" class="profile-image" alt="User Profile" />
               <ul class="dropdown-menu">
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="#" id="logoutButton">Logout</a></li>
               </ul>
         </div>
@@ -156,25 +156,6 @@ function showLoggedInUI() {
          // Add event listener for the "Log Out" button
       const logoutButton = document.getElementById('logoutButton');
       logoutButton.addEventListener('click', showLogoutModal);
-
-      //   // Function to show/hide the dropdown content
-      // function toggleDropdown() {
-      //   const dropdownContent = document.getElementById('dropdownContent');
-      //   dropdownContent.classList.toggle('show');
-      // }
-
-      // // Close the dropdown when clicking outside
-      // window.onclick = function(event) {
-      //   if (!event.target.matches('.dropdown-btn')) {
-      //     const dropdowns = document.getElementsByClassName('dropdown-content');
-      //     for (let i = 0; i < dropdowns.length; i++) {
-      //       const openDropdown = dropdowns[i];
-      //       if (openDropdown.classList.contains('show')) {
-      //         openDropdown.classList.remove('show');
-      //       }
-      //     }
-      //   }
-      // };
 
 
 }
@@ -198,7 +179,6 @@ function showNonLoggedInUI() {
 // Check login status when the page loads
 document.addEventListener('DOMContentLoaded', () => {
   checkLoginStatus();
-  console.log(checkLoginStatus)
 });
 
  const logoutModalz = document.getElementById('logoutModal');
@@ -227,6 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
    // Close the modal after logout
    closeLogoutModal();
  });
+
+
 
  
 

@@ -396,11 +396,12 @@ section{
    position: absolute;
    align-self: center;
    top: 100%;
-   right: -50%;
+   right: -30%;
    z-index: 1001;
+   border-radius: 4px;
    background-color: var(--white);
    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-   min-width: 160px;
+   min-width: 125px;
  }
 
  .dropdown-menu li {
@@ -409,7 +410,8 @@ section{
  }
 
  .dropdown-menu a:hover {
-   background-color: var(--light-black);
+   /* background-color: var(--light-black); */
+   color: var(--tomato);
  }
  
  .main-content {
@@ -954,7 +956,7 @@ section{
  
  .sc-btn {
    padding: 12px 20px;
-   border-radius: 2rem;
+   border-radius: 5px;
    background: var(--tomato);
    color: var(--white);
    font-size: 1.5rem;
@@ -1007,6 +1009,151 @@ section{
  .signup-container a:hover {
    background-color: var(--main-color);
    color: #fff;
+ }
+
+ /* Profile container */
+.profile-container {
+   display: flex;
+   flex-direction: column;
+   max-width: 600px;
+   margin: 20px auto;
+   background-color: #fff;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   padding: 20px;
+ }
+ 
+ /* Profile image */
+ .profile-container .profile-image {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .profile-container .profile-image .btn{
+   border-radius: 5px;
+ }
+ 
+ .profile-container .profile-image img {
+   width: 120px;
+   height: 120px;
+   border-radius: 50%;
+   border: 1px solid var(--light-black);
+ }
+ 
+ /* Profile info */
+ .profile-container .profile-info {
+   margin-top: 20px;
+   display: flex;
+   flex-direction: column;
+ }
+
+ .profile-container .profile-info label {
+   margin-top: 10px;
+   font-size: 1.5rem;
+ }
+
+ .profile-container .profile-info input, select {
+   padding: 8px;
+   margin-top: 5px;
+   width: 100%; /* Adjust the width as needed */
+   border: var(--border);
+ }
+ 
+ .profile-container .full-name {
+   font-size: 24px;
+   margin-bottom: 10px;
+ }
+ 
+ .profile-container .email, .profile-container .password {
+   font-size: 16px;
+   margin-bottom: 10px;
+ }
+ 
+ /* Wishlist */
+ .profile-container .profile-info h2 {
+   margin-top: 10px;
+ }
+
+ .profile-container .wishlist {
+   list-style: decimal;
+   margin: 10px 12px;
+ }
+ 
+ .profile-container .wishlist li {
+   font-size: 16px;
+   margin-bottom: 5px;
+ }
+ 
+ /* Notes */
+ .profile-container .notes {
+   font-size: 16px;
+   margin-bottom: 20px;
+ }
+ 
+ /* Buttons */
+ .profile-container .edit-account-btn,.profile-container .update-account-btn {
+   background-color: var(--main-color);
+   color: #fff;
+   padding: 10px 20px;
+   font-size: 16px;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   margin-right: 10px;
+   margin: 10px 0;
+ }
+ 
+ .profile-container .edit-account-btn:hover,.profile-container .update-account-btn:hover {
+   background-color: var(--tomato);
+ }
+
+ /* dashboard */
+ #dashboard {
+   height: 80vh;
+ }
+
+ #dashboard h2 {
+   font-size: 5rem;
+   text-align: center;
+   margin-bottom: 2rem;
+ }
+
+ .dashboard {
+   display: flex;
+   justify-content: space-around;
+   padding: 20px;
+ }
+
+ .dashboard h3 {
+   margin: 0 auto;
+   font-size: 3rem;
+   text-align: center;
+ }
+ 
+ .upcoming-trips, .recent-bookings {
+   width: 45%;
+   border: 1px solid #ccc;
+   padding: 20px;
+   border-radius: 5px;
+   text-align: center;
+ }
+ 
+ 
+ .dashboard ul {
+   list-style-type: none;
+   padding: 0;
+   font-size: 1.5rem;
+ }
+ 
+ .dashboard li {
+   margin-bottom: 10px;
+ }
+
+ #dashboard .promoImage {
+   display: flex;
+   justify-content: center;
  }
 
 /* media queries  */

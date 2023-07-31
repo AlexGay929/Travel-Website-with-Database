@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Wanderwise Voyages</title>
+
+   <!-- swiper css link  -->
+   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+    <!-- favicon -->
+
+    <!-- Add the favicon link -->
+   <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script>
+      $(document).ready(function(){
+          $(".scroll-top").click(function() {
+              $("html, body").animate({ 
+                  scrollTop: 0 
+              }, "slow");
+              return false;
+          });
+      });
+   </script>
+
+</head>
+<body>
+   
+<!-- header section starts  -->
+
+<section class="header">
+
+   <a href="index.html" class="logo"><img src="https://i.imgur.com/SJSvHEe.png"></a>
+
+   <nav class="navbar">
+      <a href="index.html">home</a>
+      <a href="about.html" class="active">about</a>
+      <a href="package.html">package</a>
+      <a href="book.html">book</a>
+      <a href="#" id="signupButton">register</a>
+      <a href="#" id="loginButton">log in</a>
+      <div id="profileSettings"></div>
+   </nav>
+
+   <div id="menu-btn" class="fas fa-bars"></div>
+
+               <!-- Sign Up Modal -->
+         <div class="signup-modal" id="signup-modal">
+            <div class="modal-content">
+               <span class="close-button" id="close-button">&times;</span>
+               <h2>Sign Up</h2>
+               <form id="signupForm" action="/sign_up" method="POST">
+                  <!-- Sign up form fields go here -->
+                  <label for="signupFullname">Full Name:</label>
+                  <input type="text" id="signupFullname" name="signupFullname" required>
+
+                  <label for="signupEmail">Email:</label>
+                  <input type="email" id="signupEmail" name="signupEmail" required>
+
+                  <label for="signupPassword">Password:</label>
+                  <input type="password" id="signupPassword" name="signupPassword" required>
+
+                  <p>Log in, if already have an account.</p>
+
+                  <button type="submit">Sign Up</button>
+               </form>
+            </div>
+      </div>
+      <!-- End -->
+
+      <!-- Login Modal -->
+      <div class="login-modal" id="login-modal">
+         <div class="modal-content">
+            <span class="close-button" id="loginclose-button">&times;</span>
+            <h2>Log In</h2>
+            <form id="loginForm" action="/login" method="POST">
+               <!-- Login form fields go here -->
+               <label for="email">Email:</label>
+               <input type="email" id="login-email" name="email" required>
+
+               <label for="password">Password:</label>
+               <input type="password" id="login-password" name="password" required>
+
+               <p>Don't have an account? Register first.</p>
+               
+               <button type="submit">Log In</button>
+            </form>
+         </div>
+      </div>
+         <!-- The logout modal -->
+      <div class="logoutModal" id="logoutModal">
+         <div class="modal-content">
+            <span class="close" id="closelogoutModal">&times;</span>
+            <img src="https://i.imgur.com/SJSvHEe.png" alt="" srcset="">
+            <form id="logoutForm" action="/logout" method="POST">
+               <p>Are you sure you want to log out?</p>
+               <button id="confirmLogout">Log Out</button>
+            </form>
+         </div>
+      </div>
+ <!-- End -->
+
+</section>
+
+<!-- header section ends -->
+<div class="banner-container">
+   <div class="heading" style="background:url(https://i.imgur.com/KlvkAoH.png) no-repeat">
+      <h1>about us</h1>
+   </div>
+</div>
+<!-- about section starts  -->
+
+<section class="about">
+
+   <div class="image">
+      <img src="https://i.imgur.com/X5xAdS0.png" alt="">
+   </div>
+
+   <div class="content">
+      <h3>Why Choose Us?</h3>
+      <p>At Wanderwise Voyages, we are passionate about curating exceptional journeys that cater to every wanderlust soul. With years of expertise in the travel industry, we take pride in offering a wide range of meticulously crafted travel packages to some of the most enchanting destinations around the Philippines.
+
+         Our mission is to turn your travel dreams into reality, creating memories that last a lifetime. Whether you're seeking an adrenaline-pumping adventure, a relaxing beach getaway, a cultural immersion, or a luxurious escapade, we have the perfect itinerary waiting for you.
+         
+         Our team of travel experts is committed to providing personalized service and attention to detail, ensuring that each aspect of your journey is seamless and stress-free. From the moment you step on board until you return home, we are dedicated to making your travel experience smooth, safe, and extraordinary.</p>
+      <div class="icons-container">
+         <div class="icons">
+            <i class="fas fa-map"></i>
+            <span>TOP DESTINATIONS</span>
+         </div>
+         <div class="icons">
+            <i class="fas fa-headset"></i>
+            <span>24/7 GUIDE SERVICE</span>
+         </div>
+         <div class="icons">
+            <i class="fas fa-hand-holding-usd"></i>
+            <span>REASONABLE PRICE</span>
+         </div>
+      </div>
+   </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- reviews section starts  -->
+
+<section class="reviews">
+
+   <h1 class="heading-title"> clients reviews </h1>
+
+   <div class="swiper reviews-slider">
+
+      <div class="swiper-wrapper">
+
+         <div class="swiper-slide slide">
+            <div class="stars">
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+            </div>
+            <p>"I had an amazing experience booking my vacation through this travel agency website. The website was user-friendly, making it easy to search and compare different packages. The customer service was top-notch, with prompt responses to my inquiries."</p>
+            <h3>Jessie McCartney</h3>
+            <span>TRAVELER</span>
+            <img src="https://i.imgur.com/wtEkuuU.png" alt="">
+         </div>
+
+         <div class="swiper-slide slide">
+            <div class="stars">
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+            </div>
+            <p>"I have been using this travel agency website for years, and they never disappoint. It is filled with a wide range of destinations and travel options to suit every budget and interest. The team behind the website is knowledgeable and passionate about travel."</p>
+            <h3>Richard Bates</h3>
+            <span>TRAVELER</span>
+            <img src="https://i.imgur.com/OIv2EWD.png" alt="">
+         </div>
+
+         <div class="swiper-slide slide">
+            <div class="stars">
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+            </div>
+            <p>"This travel agency website is my go-to for planning family vacations. They understand the needs of families and offer excellent family-friendly packages. The website layout is clear and organized, making it easy to find activities and accommodations.</p>
+            <h3>Laura Dauntless</h3>
+            <span>TRAVELER</span>
+            <img src="https://i.imgur.com/vNPEA5p.png" alt="">
+         </div>
+
+         <div class="swiper-slide slide">
+            <div class="stars">
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+            </div>
+            <p>"I'm an adventure enthusiast, and this travel agency website has become my travel companion for thrilling journeys. Their selection of adventure tours is impressive, catering to all levels of adventure seekers.</p>
+            <h3>Nora Vasilenko</h3>
+            <span>TRAVELER</span>
+            <img src="https://i.imgur.com/GrlT9ZO.png" alt="">
+         </div>
+
+         <div class="swiper-slide slide">
+            <div class="stars">
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+            </div>
+            <p>"Booking my beach vacation through this travel agency website was a breeze. They have an excellent selection of tropical destinations with stunning beach resorts. The website provides detailed information about each resort, .</p>
+            <h3>John Moore</h3>
+            <span>TRAVELER</span>
+            <img src="https://i.imgur.com/m1rQE4H.png" alt="">
+         </div>
+
+         <div class="swiper-slide slide">
+            <div class="stars">
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+            </div>
+            <p>"As someone who loves immersing in different cultures, this travel agency website has been a gem. Their cultural tours are thoughtfully curated, offering unique experiences that go beyond the usual tourist attractions.</p>
+            <h3>Mark Berger</h3>
+            <span>TRAVELER</span>
+            <img src="https://i.imgur.com/HSdbHxc.png" alt="">
+         </div>
+
+      </div>
+
+   </div>
+
+</section>
+
+<!-- reviews section ends -->
+<!-- footer section starts  -->
+<button type="button" class="scroll-top"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+
+<section class="footer">
+   <div class="box-container">
+      <div class="box">
+         <h3>Quick Links</h3>
+         <a href="home.html"> <i class="fas fa-angle-right"></i> Home</a>
+         <a href="about.html"> <i class="fas fa-angle-right"></i> About</a>
+         <a href="package.html"> <i class="fas fa-angle-right"></i> Package</a>
+         <a href="book.html"> <i class="fas fa-angle-right"></i> Book</a>
+      </div>
+      <div class="box">
+         <h3>Extra Links</h3>
+         <a href="#"> <i class="fas fa-angle-right"></i> About Us</a>
+         <a href="#"> <i class="fas fa-angle-right"></i> Ask Questions</a>
+         <a href="#"> <i class="fas fa-angle-right"></i> Terms of Use</a>
+         <a href="#"> <i class="fas fa-angle-right"></i> Privacy Policy</a>
+      </div>
+      <div class="box">
+         <h3>Contact Info</h3>
+         <a href="#"> <i class="fas fa-phone"></i> +639317290210 </a>
+         <a href="#"> <i class="fas fa-phone"></i> +639317290210 </a>
+         <a href="#"> <i class="fas fa-envelope"></i> alexgay27753@gmail.com </a>
+         <a href="#"> <i class="fas fa-map"></i> Matalom, Philippines  </a>
+      </div>
+      <div class="box">
+         <h3>Follow Us</h3>
+         <a href="#"> <i class="fab fa-linkedin"></i> Linkedin </a>
+         <a href="#"> <i class="fab fa-facebook-f"></i> Facebook </a>
+         <a href="#"> <i class="fab fa-instagram"></i> Instagram </a>
+         <a href="#"> <i class="fab fa-twitter"></i> Twitter </a>
+      </div>
+   </div>
+   <div class="credit"> designed by <span>Alex Gay</span> | All Rights Reserved! </div>
+</section>
+
+<!-- footer section ends -->
+
+<!-- scroll reveal -->
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<!-- swiper js link  -->
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
