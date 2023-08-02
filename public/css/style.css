@@ -391,7 +391,7 @@ section{
    border: 1px solid var(--light-black);
  }
 
- .dropdown-menu {
+  .dropdown-menu {
    display: none;
    position: absolute;
    align-self: center;
@@ -404,12 +404,12 @@ section{
    min-width: 125px;
  }
 
- .dropdown-menu li {
+  .dropdown-menu li {
    text-decoration: none;
    list-style: none;
  }
 
- .dropdown-menu a:hover {
+  .dropdown-menu a:hover {
    /* background-color: var(--light-black); */
    color: var(--tomato);
  }
@@ -1012,6 +1012,10 @@ section{
  }
 
  /* Profile container */
+ section #profile {
+   height : 100vh;
+ }
+
 .profile-container {
    display: flex;
    flex-direction: column;
@@ -1021,6 +1025,15 @@ section{
    border: 1px solid #ddd;
    border-radius: 8px;
    padding: 20px;
+ }
+
+ .profile-container .profile-header h2 {
+   font-size: 2.5rem;
+   text-align: center;
+ }
+
+ .profile-container .profile-image #image-input {
+   align-self: center;
  }
  
  /* Profile image */
@@ -1033,6 +1046,11 @@ section{
 
  .profile-container .profile-image .btn{
    border-radius: 5px;
+   background-color: var(--main-color);
+ }
+
+ .profile-container .profile-image .btn:hover {
+   background-color: var(--tomato);
  }
  
  .profile-container .profile-image img {
@@ -1107,6 +1125,11 @@ section{
  
  .profile-container .edit-account-btn:hover,.profile-container .update-account-btn:hover {
    background-color: var(--tomato);
+ }
+
+ .no-hover {
+   pointer-events: none;
+   cursor: default;
  }
 
  /* dashboard */

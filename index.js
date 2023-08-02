@@ -5,9 +5,15 @@ var favicon = require('serve-favicon')
 var path = require('path')
 var cookieParser = require('cookie-parser')
 const session = require('express-session');
+const multer = require('multer');
+const cors = require('cors');
+const fs = require('fs');
+
 
 const app = express()
 const port1 = 3000; // First port (for frontend)
+
+
 
 // Use bodyParser middleware to parse JSON data from requests
 app.use(bodyParser.urlencoded({extended: true}));
@@ -16,6 +22,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// Allow cross-origin requests for all routes
+app.use(cors());
+
+
 // // Middleware to parse form data and set up session
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
@@ -46,12 +57,19 @@ const isAuthenticated = (req, res, next) => {
  `);
 };
 
+// Set up multer for image upload
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads/');
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const fileExtension = path.extname(file.originalname);
+    cb(null, 'profile_image-' + uniqueSuffix + fileExtension);
+  }
+});
 
-
-// Home Route
-// app.get('/', (req, res) => {
-//     res.sendFile('index.html', {root: 'public'});
-// })
+const upload = multer({ storage: storage });
 
 
 // Connect to MongoDB (replace 'YOUR_MONGODB_URI' with your actual MongoDB connection URI)
@@ -86,6 +104,11 @@ const Form1Schema = new mongoose.Schema({
     fullname : String,
     signupEmail : String,
     signupPassword : String,
+    image: 
+       {
+      data: Buffer,
+      contentType: String
+        },
     // Add other fields as needed for Form2
   });
   
@@ -259,3 +282,117 @@ function destroySession(req, res) {
     console.log('Session destroyed!');
   });
   
+
+// Route to fetch user data for the profile page
+app.get('/api/profile', isAuthenticated, async (req, res) => {
+  const loginEmail = req.session.user.email; // Access email from the session
+
+  try {
+    // Query the database to find the user with the given email
+    const user = await db.collection('signupformdatas').findOne({ email: loginEmail });
+
+    if (user) {
+      // Send the user data as a JSON response
+      res.json({ user });
+    } else {
+      // If user not found, send an error response
+      res.status(404).json({ error: 'User not found.' });
+    }
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+//  API endpoint to update user data
+app.put('/api/profile/update', isAuthenticated, async (req, res) => {
+  const updatedUserData = req.body; // Assuming the request body contains the updated user data
+  const loginEmail = req.session.user.email; // Access email from the session
+
+
+  try {
+
+    // Find the user by ID (you might use a different identifier, like email)
+    const user = await db.collection('signupformdatas').findOne({ email: loginEmail });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    // Update the user data in the database
+    user.name = updatedUserData.name;
+    user.email = updatedUserData.email;
+    user.password = updatedUserData.password;
+    // Update the user data in the database
+    await db.collection('signupformdatas').updateOne(
+      { email: loginEmail },
+      { $set: { name: updatedUserData.name, email: updatedUserData.email, password: updatedUserData.password } }
+    );
+
+    res.status(200).json({ message: 'User data updated successfully.' });
+  } catch (error) {
+    console.error('Error updating user data:', error);
+    res.status(500).json({ message: 'Error updating user data.' });
+  }
+});
+
+
+// API endpoint to handle image upload
+app.post('/api/profile/upload', isAuthenticated, upload.single('profileImage'), async (req, res) => {
+  const loginEmail = req.session.user.email; // Access email from the session
+
+  try {
+    // Check if the image was uploaded
+    if (req.file) {
+      // Save the image path to the user data
+      const imagePath = '/uploads/' + req.file.filename;
+      // Read the image file and get its data and content type
+      const imageFile = fs.readFileSync(req.file.path);
+      const imageBufferData = imageFile.toString('base64');
+      const imageContentType = req.file.mimetype;
+
+      // Update the user data in the database with the new image path
+      await db.collection('signupformdatas').updateOne(
+        { email: loginEmail },
+        { image: { imagePath }}
+      );
+
+      // Delete the temporary image file after updating the data in the database
+      fs.unlinkSync(req.file.path);
+
+
+      res.status(200).json({ message: 'Image uploaded successfully.' });
+    } else {
+      res.status(400).json({ message: 'No image file received.' });
+    }
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    res.status(500).json({ message: 'Error uploading image.' });
+  }
+});
+
+// Route to fetch the profile image for the user
+// app.get('/api/profile/profileImage', isAuthenticated, async (req, res) => {
+//   try {
+//     const loginEmail = req.session.user.email;
+//     // Query the database to find the user with the given loginEmail
+//     const user = await db.collection('signupformdatas').findOne({ email: loginEmail });
+
+//     if (user && user.image) {
+//       // If the user and the profile image are found, send the image data as a response
+//       const imageBuffer = Buffer.from(user.image.data, 'base64'); // Convert the base64 image data to a buffer
+//       res.set('Content-Type', user.image.contentType); // Set the content type of the response to the image's content type
+//       res.send(imageBuffer);
+//       console.log(imageBuffer) // Send the image buffer directly as the response
+//     } else {
+//       // If the user or the profile image is not found, send an error response
+//       res.status(404).json({ error: 'User or profile image not found.' });
+//     }
+//   } catch (error) {
+//     console.error('Error fetching profile image:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
+
+

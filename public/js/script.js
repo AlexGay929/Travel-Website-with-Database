@@ -131,7 +131,8 @@ function showLoggedInUI() {
   const profileSettings = document.getElementById('profileSettings');
   profileSettings.innerHTML = `
           <div id="profile-dropdown">
-              <img src="https://i.imgur.com/r79g1jQ.jpg" class="profile-image" alt="User Profile" />
+              <img src="https://i.imgur.com/r79g1jQ.jpg" class="profile-img" id="profile-image" alt="User Profile" />
+              <input type="file" id="image-input" style="display: none;">
               <ul class="dropdown-menu">
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="dashboard.html">Dashboard</a></li>
@@ -141,9 +142,9 @@ function showLoggedInUI() {
           `;
           document.addEventListener("click", function (event) {
             const dropdown = document.querySelector(".dropdown-menu");
-            const profileImage = document.getElementById("profile-dropdown");
+            const profileDropdown = document.getElementById("profile-dropdown");
           
-            if (!profileImage.contains(event.target)) {
+            if (!profileDropdown.contains(event.target)) {
               dropdown.style.display = "none";
             }
           });
@@ -157,6 +158,7 @@ function showLoggedInUI() {
       const logoutButton = document.getElementById('logoutButton');
       logoutButton.addEventListener('click', showLogoutModal);
 
+      getProfileImageFromLocalStorage()
 
 }
 
@@ -167,8 +169,7 @@ function showNonLoggedInUI() {
    const signupButton = document.getElementById('signupButton');
    const loginButton = document.getElementById('loginButton');
    const profileSettings = document.getElementById('profileSettings');
-  //  const profileInfo = document.getElementById('profile-info');
-  //  profileInfo.classList.remove('show');
+  
    profileSettings.style.display = 'none';
    signupButton.style.display = 'block';
    loginButton.style.display = 'block';
@@ -202,14 +203,32 @@ document.addEventListener('DOMContentLoaded', () => {
  // Event listener for the "Log Out" button in the modal
  confirmLogout.addEventListener('click', () => {
    // Add logout functionality here (e.g., clear session data, redirect to login page, etc.)
-  console.log('Logging out...'); // Replace with actual logout code
+  console.log('Logging out...');
 
    // Close the modal after logout
    closeLogoutModal();
  });
 
 
+ function getProfileImageFromLocalStorage() {
+  // Retrieve the image data from local storage
+  const storedProfileImage = localStorage.getItem('profileImage');
+  console.log(storedProfileImage);
 
- 
+  // Check if the profile image URL exists in local storage
+  if (storedProfileImage) {
+    // Get the profile image element
+    const profileImage = document.querySelector(".profile-img");
 
- 
+    // Set the profile image URL as the source for the profile image
+    profileImage.src = storedProfileImage;
+  }
+}
+
+// Call the function to set the profile image from local storage on page load
+document.addEventListener("DOMContentLoaded", getProfileImageFromLocalStorage);
+
+
+
+
+
