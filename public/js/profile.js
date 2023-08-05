@@ -1,8 +1,3 @@
-function testFunction() {
-  console.log("ok ka paare ko!")
-}
-
-testFunction();
 
 // Open the sign-up modal when the sign-up button is clicked
 document.getElementById("signupButton").addEventListener("click", function() {
@@ -13,8 +8,6 @@ document.getElementById("signupButton").addEventListener("click", function() {
 document.getElementById("close-button").addEventListener("click", function() {
   document.getElementById("signup-modal").style.display = "none";
 });
-
-
 
 
 // Function to show the login modal
@@ -33,92 +26,9 @@ function closeModal() {
 document.getElementById('loginButton').addEventListener('click', openModal);
 document.getElementById('loginclose-button').addEventListener('click', closeModal);
 
-
-// client.js
-async function checkLoginStatus() {
- try {
-   const response = await fetch('/api/login-status');
-   const data = await response.json();
-
-   // data.isLoggedIn will be true if the user is logged in
-   // Update the UI based on the login status
-   if (data.isLoggedIn) {
-     // Show a logged-in user interface
-     showLoggedInUI();
-   } else {
-     // Show a non-logged-in user interface
-     showNonLoggedInUI();
-   }
- } catch (error) {
-   console.error('Error fetching login status:', error);
- }
-}
-
-function showLoggedInUI() {
- // Update the UI to show elements for logged-in users
- // Remove the "Register" and "Log In" buttons
- const signupButton = document.getElementById('signupButton');
- const loginButton = document.getElementById('loginButton');
- signupButton.style.display = 'none';
- loginButton.style.display = 'none';
- document.getElementById('loginForm').style.display = 'none';
-
- // Display the profile settings with an image
- const profileSettings = document.getElementById('profileSettings');
- profileSettings.innerHTML = `
-         <div id="profile-dropdown">
-             <img src="https://i.imgur.com/r79g1jQ.jpg" class="profile-img" alt="User Profile" />
-             <ul class="dropdown-menu">
-               <li><a href="profile.html">Profile</a></li>
-               <li><a href="dashboard.html">Dashboard</a></li>
-               <li><a href="#" id="logoutButton">Logout</a></li>
-             </ul>
-       </div>
-         `;
-         document.addEventListener("click", function (event) {
-           const dropdown = document.querySelector(".dropdown-menu");
-           const profileDropdown = document.getElementById("profile-dropdown");
-         
-           if (!profileDropdown.contains(event.target)) {
-             dropdown.style.display = "none";
-           }
-         });
-         
-         document.getElementById("profile-dropdown").addEventListener("click", function () {
-           const dropdown = document.querySelector(".dropdown-menu");
-           dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-         });
-
-        // Add event listener for the "Log Out" button
-     const logoutButton = document.getElementById('logoutButton');
-     logoutButton.addEventListener('click', showLogoutModal);
-
-
-}
-
-
-function showNonLoggedInUI() {
- // Update the UI to show elements for non-logged-in users
-  // Remove the "Register" and "Log In" buttons
-  const signupButton = document.getElementById('signupButton');
-  const loginButton = document.getElementById('loginButton');
-  const profileSettings = document.getElementById('profileSettings');
- //  const profileInfo = document.getElementById('profile-info');
- //  profileInfo.classList.remove('show');
-  profileSettings.style.display = 'none';
-  signupButton.style.display = 'block';
-  loginButton.style.display = 'block';
- document.getElementById('loginForm').style.display = 'block';
-
-}
-
-// Check login status when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-  checkLoginStatus();
-});
-
+// Functions for the logoutModal
 const logoutModalz = document.getElementById('logoutModal');
-const closeModalz = document.getElementById('closelogoutModal');
+const closeModalz = document.getElementById('logoutModal');
 const confirmLogout = document.getElementById('confirmLogout');
 const cancelLogout = document.getElementById('cancelLogout');
 
@@ -137,13 +47,208 @@ closeModalz.addEventListener('click', closeLogoutModal);
 
 // Event listener for the "Log Out" button in the modal
 confirmLogout.addEventListener('click', () => {
-  // Add logout functionality here (e.g., clear session data, redirect to login page, etc.)
- console.log('Logging out...'); // Replace with actual logout code
+
+ console.log('Logging out...'); 
 
   // Close the modal after logout
   closeLogoutModal();
 });
 
+// declared outside to ease the errors
+const fetchProfileImage = async () => {
+  try {
+    // Fetch the profile image URL from the server
+    const response = await fetch('/profile-image');
+    const responseData = await response.json();
+
+    if (response.ok) {
+      const imageUrl = responseData.user;
+      // const imageData = responseData.url; // Assuming the server sends JSON data with the image URL
+      return imageUrl; // Return the fetched image data
+    } else if (response.status === 401) {
+      return null; // User is not logged in, return null for no image data
+    } else {
+      throw new Error('Failed to fetch profile image URL');
+    }
+  } catch (error) {
+    console.error('Error fetching profile image:', error);
+    throw error; // Re-throw the error to handle it in the caller function
+  }
+}
+// Define the UIHandler object outside the DOMContentLoaded event listener
+const UIHandler = {
+  showLoggedInUI: async function() {
+
+    
+    try {
+      // Update the UI to show elements for logged-in users
+      // Remove the "Register" and "Log In" button
+      const signupButton = document.getElementById('signupButton');
+      const loginButton = document.getElementById('loginButton');
+      const profileSettings = document.getElementById('profileSettings');
+
+      signupButton.style.display = 'none';
+      loginButton.style.display = 'none';
+      profileSettings.style.display = 'block';
+
+      // Call fetchProfileImage to get the image data
+      const imageData = await fetchProfileImage();
+
+      // Get the image element
+      const profileImageElement = document.getElementById('profile-image');
+
+      if (imageData) {
+
+        // Set the image source in my Profile with the fetched image URL
+        profileImageElement.src = imageData;
+
+        // Display the profile settings with the fetched image data
+        profileSettings.innerHTML = `
+          <div id="profile-dropdown">
+            <img src="${imageData}" class="profile-img" id="profile-image" alt="User Profile" />
+            <ul class="dropdown-menu">
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="dashboard.html">Dashboard</a></li>
+              <li><a href="#" id="logoutButton">Logout</a></li>
+            </ul>
+          </div>
+        `;
+
+        // Add event listener to toggle dropdown menu
+        document.addEventListener("click", function (event) {
+          const dropdown = document.querySelector(".dropdown-menu");
+          const profileDropdown = document.getElementById("profile-dropdown");
+          if (!profileDropdown.contains(event.target)) {
+            dropdown.style.display = "none";
+          }
+        });
+
+        document.getElementById("profile-dropdown").addEventListener("click", function () {
+          const dropdown = document.querySelector(".dropdown-menu");
+          dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+        });
+              // Open the sign-up modal when the sign-up button is clicked
+      document.getElementById("logoutButton").addEventListener("click", function() {
+        document.getElementById("logoutModal").style.display = "block";
+      });
+
+            // Attach click event listener to the "Edit Account" button
+      const editAccountBtn = document.getElementById('editAccountbtn');
+      editAccountBtn.addEventListener('click', () => {
+        console.log('Edit Account button clicked!');
+        // Enable the form elements when the button is clicked
+        const fullNameInput = document.getElementById('full-name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const uploadBtn = document.getElementById('upload-btn');
+        const updateAccountBtn = document.getElementById('updateAccountbtn');
+        const imageInput = document.getElementById('image-input');
+
+        imageInput.disabled = false;
+        fullNameInput.disabled = false;
+        emailInput.disabled = false;
+        passwordInput.disabled = false;
+        uploadBtn.disabled = false;
+        updateAccountBtn.disabled = false;
+        editAccountBtn.disabled = true;
+
+        // Remove hover effect for disabled buttons
+        editAccountBtn.classList.add('no-hover');
+        uploadBtn.classList.remove('no-hover');
+        updateAccountBtn.classList.remove('no-hover');
+      });
+
+      // Attach click event listener to the "Update Account" button
+      const updateAccountBtn = document.getElementById('updateAccountbtn');
+      updateAccountBtn.addEventListener('click', () => {
+        updateAccount(); // Call the updateAccount function when the button is clicked
+
+        // Disable form elements except the "Edit Account" button
+        const uploadBtn = document.getElementById('upload-btn');
+        const fullNameInput = document.getElementById('full-name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const editAccountBtn = document.getElementById('editAccountbtn');
+        const imageInput = document.getElementById('image-input');
+
+        fullNameInput.disabled = true;
+        emailInput.disabled = true;
+        passwordInput.disabled = true;
+        uploadBtn.disabled = true;
+        updateAccountBtn.disabled = true;
+        editAccountBtn.disabled = false;
+        imageInput.disabled = true;
+
+        // Remove hover effect for disabled buttons
+        editAccountBtn.classList.remove('no-hover');
+        uploadBtn.classList.add('no-hover');
+        updateAccountBtn.classList.add('no-hover');
+      });
+      
+      // Event listener for showing the logoutModal
+      logoutModalz.addEventListener('click', showLogoutModal);
+
+       // Event listener for the close button in the modal
+      closeModalz.addEventListener('click', closeLogoutModal);
+
+      // Event listener for the "Log Out" button in the modal
+      confirmLogout.addEventListener('click', () => {
+        // Add logout functionality here (e.g., clear session data, redirect to login page, etc.)
+      console.log('Logging out...');
+
+        // Close the modal after logout
+        closeLogoutModal();
+      });
+      
+      }
+    } catch (error) {
+      console.error('Error fetching profile image:', error);
+      // Handle the error or set a default image
+      const profileImageElement = document.getElementById('profile-image');
+      const imgurImageUrl = 'https://i.imgur.com/r79g1jQ.jpg'; // Replace with the correct default image path
+      profileImageElement.src = imgurImageUrl;
+    }
+  }
+};
+
+// CHECK LOG IN STATUS
+async function checkLoginStatus() {
+  try {
+    const response = await fetch('/api/login-status');
+    const data = await response.json();
+
+    // data.isLoggedIn will be true if the user is logged in
+    // Update the UI based on the login status
+    if (data.isLoggedIn) {
+      // Show a logged-in user interface
+      UIHandler.showLoggedInUI(); // Call the showLoggedInUI function through the UIHandler object
+      setFormElementsStatus(data.user);
+    } else {
+      // Show a non-logged-in user interface
+      showNonLoggedInUI();
+    }
+  } catch (error) {
+    console.error('Error fetching login status:', error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  checkLoginStatus();
+});
+
+
+function showNonLoggedInUI() {
+ // Update the UI to show elements for non-logged-in users
+  const signupButton = document.getElementById('signupButton');
+  const loginButton = document.getElementById('loginButton');
+  const profileSettings = document.getElementById('profileSettings');
+ 
+  profileSettings.style.display = 'none';
+  signupButton.style.display = 'block';
+  loginButton.style.display = 'block';
+ document.getElementById('loginForm').style.display = 'block';
+
+}
 
 // function to disable and enable elements
 function setFormElementsStatus(user) {
@@ -166,7 +271,6 @@ function setFormElementsStatus(user) {
     fullNameInput.disabled = true;
     emailInput.disabled = true;
     passwordInput.disabled = true;
-    editAccountBtn.disabled = false;
     updateAccountBtn.disabled = true;
 
     // Remove hover effect for disabled buttons
@@ -182,7 +286,6 @@ function setFormElementsStatus(user) {
     fullNameInput.disabled = true;
     emailInput.disabled = true;
     passwordInput.disabled = true;
-    editAccountBtn.disabled = true;
     updateAccountBtn.disabled = true;
 
     // Remove hover effect for disabled buttons
@@ -191,110 +294,8 @@ function setFormElementsStatus(user) {
   }
 }
 
-
-// fetch user datas from server
-document.addEventListener('DOMContentLoaded', async function () {
-  // Get the profile input fields
-  const fullNameInput = document.getElementById('full-name');
-  const emailInput = document.getElementById('email');
-  const passwordInput = document.getElementById('password');
-  const profileSettings = document.getElementById('profileSettings');
-  const profileImage = document.getElementById('profile-img');
-
-  
-  // Retrieve the image data from local storage
-  const storedProfileImage = localStorage.getItem('profileImage');
-  if (storedProfileImage) {
-    profileImage.src = storedProfileImage;
-    console.log(profileImage)
-  }
-
-  try {
-    // Fetch user data from the backend API
-    const response = await fetch('/api/profile');
-    const data = await response.json();
-
-    if (data.user) {
-      // Populate the input fields with the user data
-      fullNameInput.value = data.user.name;
-      emailInput.value = data.user.email;
-      passwordInput.value = data.user.password;
-
-
-      // Display the profile settings with the image and dropdown menu
-      profileSettings.innerHTML = `
-        <div id="profile-dropdown">
-          <img src="${storedProfileImage}" class="profile-img" id="profile-image" alt="User Profile" />
-          <ul class="dropdown-menu">
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="#" id="logoutButton">Logout</a></li>
-          </ul>
-        </div>
-      `;
-
-      document.addEventListener("click", function (event) {
-        const dropdown = document.querySelector(".dropdown-menu");
-        const profileDropdown = document.getElementById("profile-dropdown");
-      
-        if (!profileDropdown.contains(event.target)) {
-          dropdown.style.display = "none";
-        }
-      });
-      
-      document.getElementById("profile-dropdown").addEventListener("click", function () {
-        const dropdown = document.querySelector(".dropdown-menu");
-        dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-      });
-
-       // Add event listener for the "Log Out" button
-     const logoutButton = document.getElementById('logoutButton');
-     logoutButton.addEventListener('click', showLogoutModal);
-
-      // Call the function with the user data to enable/disable form elements
-      setFormElementsStatus(data.user); // <-- Call here
-
-      // Attach click event listener to the "Edit Account" button
-      // Function to edit user datas in DOM
-      const editAccountBtn = document.getElementById('editAccountbtn');
-    
-      editAccountBtn.addEventListener('click', () => {
-        // Enable the form elements when the button is clicked
-        const fullNameInput = document.getElementById('full-name');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const uploadBtn = document.getElementById('upload-btn');
-        const updateAccountBtn = document.getElementById('updateAccountbtn');
-        const imageInput = document.getElementById('image-input');
-
-        imageInput.disabled = false;
-        fullNameInput.disabled = false;
-        emailInput.disabled = false;
-        passwordInput.disabled = false;
-        uploadBtn.disabled = false;
-        updateAccountBtn.disabled = false;
-        editAccountBtn.disabled = true;
-
-         // Remove hover effect for disabled buttons
-        editAccountBtn.classList.add('no-hover');
-        uploadBtn.classList.remove('no-hover');
-        updateAccountBtn.classList.remove('no-hover');
-      });
-
-     
-
-    } else {
-      console.error('Error:', data.error);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-  
-});
-
-
 // Update User Accounts Profile
- async function updateAccount() {
+async function updateAccount() {
   const fullNameInput = document.getElementById('full-name');
   const emailInput = document.getElementById('email');
   const passwordInput = document.getElementById('password');
@@ -321,36 +322,252 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 }
 
-// Attach click event listener to the "Update Account" button
-const updateAccountBtn = document.getElementById('updateAccountbtn');
-updateAccountBtn.addEventListener('click', () => {
-  updateAccount(); // Call the updateAccount function when the button is clicked
 
-  // Disable form elements except the "Edit Account" button
-  const uploadBtn = document.getElementById('upload-btn');
+
+// fetch user datas from server
+document.addEventListener('DOMContentLoaded', async function () {
+  console.log('DOM content loaded!');
+  // Get the profile input fields
   const fullNameInput = document.getElementById('full-name');
   const emailInput = document.getElementById('email');
   const passwordInput = document.getElementById('password');
-  const editAccountBtn = document.getElementById('editAccountbtn');
-  const imageInput = document.getElementById('image-input');
+  const profileSettings = document.getElementById('profileSettings');
+  
+  try {
+    // Fetch user data from the backend API
+    const response = await fetch('/api/profile');
+    const data = await response.json();
 
-  fullNameInput.disabled = true;
-  emailInput.disabled = true;
-  passwordInput.disabled = true;
-  uploadBtn.disabled = true;
-  updateAccountBtn.disabled = true;
-  editAccountBtn.disabled = false;
-  imageInput.disabled = true;
+    if (data.user) {
+      // Populate the input fields with the user data
+      fullNameInput.value = data.user.name;
+      emailInput.value = data.user.email;
+      passwordInput.value = data.user.password;
 
-  // Remove hover effect for disabled buttons
-  editAccountBtn.classList.remove('no-hover');
-  uploadBtn.classList.add('no-hover');
-  updateAccountBtn.classList.add('no-hover');
+      // Fetch the profile image data from the server
+      const response = await fetch(`/profile-image`);
+      const responseData = await response.json();
+
+      if (response.ok) {
+        const imageUrl = await responseData.user;
+        if (imageUrl) {
+          return imageUrl;
+        }
+        // Display the profile settings with the image and dropdown menu
+        profileSettings.innerHTML = `
+          <div id="profile-dropdown">
+            <img src="${imageUrl}" class="profile-img" id="profile-image" alt="User Profile" />
+            <ul class="dropdown-menu">
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="dashboard.html">Dashboard</a></li>
+              <li><a href="#" id="logoutButton">Logout</a></li>
+            </ul>
+          </div>
+        `;
+
+        document.addEventListener("click", function (event) {
+          const dropdown = document.querySelector(".dropdown-menu");
+          const profileDropdown = document.getElementById("profile-dropdown");
+          if (!profileDropdown.contains(event.target)) {
+            dropdown.style.display = "none";
+          }
+        });
+
+        document.getElementById("profile-dropdown").addEventListener("click", function () {
+          const dropdown = document.querySelector(".dropdown-menu");
+          dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+        });
+
+        // Add event listener for the "Log Out" button
+        const logoutButton = document.getElementById('logoutButton');
+        logoutButton.addEventListener('click', showLogoutModal);
+
+        // Function to edit user datas in DOM
+        const editAccountBtn = document.getElementById('editAccountbtn');
+        editAccountBtn.addEventListener('click', () => {
+          console.log('Edit Account button clicked!');
+          
+          // Enable the form elements when the button is clicked
+          const fullNameInput = document.getElementById('full-name');
+          const emailInput = document.getElementById('email');
+          const passwordInput = document.getElementById('password');
+          const uploadBtn = document.getElementById('upload-btn');
+          const updateAccountBtn = document.getElementById('updateAccountbtn');
+          const imageInput = document.getElementById('image-input');
+
+          imageInput.disabled = false;
+          fullNameInput.disabled = false;
+          emailInput.disabled = false;
+          passwordInput.disabled = false;
+          uploadBtn.disabled = false;
+          updateAccountBtn.disabled = false;
+          // editAccountBtn.disabled = true;
+
+          // Remove hover effect for disabled buttons
+          editAccountBtn.classList.add('no-hover');
+          uploadBtn.classList.remove('no-hover');
+          updateAccountBtn.classList.remove('no-hover');
+
+          
+        });
+              
+          // Attach click event listener to the "Update Account" button
+          const updateAccountBtn = document.getElementById('updateAccountbtn');
+          updateAccountBtn.addEventListener('click', () => {
+            updateAccount(); // Call the updateAccount function when the button is clicked
+
+            // Disable form elements except the "Edit Account" button
+            const uploadBtn = document.getElementById('upload-btn');
+            const fullNameInput = document.getElementById('full-name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const editAccountBtn = document.getElementById('editAccountbtn');
+            const imageInput = document.getElementById('image-input');
+
+            fullNameInput.disabled = true;
+            emailInput.disabled = true;
+            passwordInput.disabled = true;
+            uploadBtn.disabled = true;
+            updateAccountBtn.disabled = true;
+            // editAccountBtn.disabled = false;
+            imageInput.disabled = true;
+
+            // Remove hover effect for disabled buttons
+            editAccountBtn.classList.remove('no-hover');
+            uploadBtn.classList.add('no-hover');
+            updateAccountBtn.classList.add('no-hover');
+          });
+      } else {
+        // If there's no profile image, display the profile settings without the image
+        // You can customize this as per your requirements.
+        profileSettings.innerHTML = `
+          <div id="profile-dropdown">
+            <img src="https://i.imgur.com/r79g1jQ.jpg" class="profile-img" id="profile-image" alt="User Profile" />
+            <ul class="dropdown-menu">
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="dashboard.html">Dashboard</a></li>
+              <li><a href="#" id="logoutButton">Logout</a></li>
+            </ul>
+          </div>
+        `;
+      }
+    } else {
+      console.error('Error:', data.error);
+    }
+  } catch (error) {
+    console.error('Error fetching profile image:', error);
+    // Handle the error or set a default image
+    // // Get the image element
+    const imgurImageUrl = 'https://i.imgur.com/r79g1jQ.jpg'; // Replace with the correct default image path
+    const profileSettings = document.getElementById('profileSettings');
+  
+      // Display the profile settings with the fetched image data
+      profileSettings.innerHTML = `
+        <div id="profile-dropdown">
+          <img src="${imgurImageUrl}" class="profile-img" id="profile-image" alt="User Profile" />
+          <ul class="dropdown-menu">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="#" id="logoutButton">Logout</a></li>
+          </ul>
+        </div>
+      `;
+
+      // Add event listener to toggle dropdown menu
+      document.addEventListener("click", function (event) {
+        const dropdown = document.querySelector(".dropdown-menu");
+        const profileDropdown = document.getElementById("profile-dropdown");
+        if (!profileDropdown.contains(event.target)) {
+          dropdown.style.display = "none";
+        }
+      });
+
+      document.getElementById("profile-dropdown").addEventListener("click", function () {
+        const dropdown = document.querySelector(".dropdown-menu");
+        dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+      });
+            // Open the sign-up modal when the sign-up button is clicked
+    document.getElementById("logoutButton").addEventListener("click", function() {
+      document.getElementById("logoutModal").style.display = "block";
+    });
+
+         // Function to edit user datas in DOM
+         const editAccountBtn = document.getElementById('editAccountbtn');
+         editAccountBtn.addEventListener('click', () => {
+           console.log('Edit Account button clicked!');
+           
+           // Enable the form elements when the button is clicked
+           const fullNameInput = document.getElementById('full-name');
+           const emailInput = document.getElementById('email');
+           const passwordInput = document.getElementById('password');
+           const uploadBtn = document.getElementById('upload-btn');
+           const updateAccountBtn = document.getElementById('updateAccountbtn');
+           const imageInput = document.getElementById('image-input');
+ 
+           imageInput.disabled = false;
+           fullNameInput.disabled = false;
+           emailInput.disabled = false;
+           passwordInput.disabled = false;
+           uploadBtn.disabled = false;
+           updateAccountBtn.disabled = false;
+           // editAccountBtn.disabled = true;
+ 
+           // Remove hover effect for disabled buttons
+           editAccountBtn.classList.add('no-hover');
+           uploadBtn.classList.remove('no-hover');
+           updateAccountBtn.classList.remove('no-hover');
+ 
+           
+         });
+               
+           // Attach click event listener to the "Update Account" button
+           const updateAccountBtn = document.getElementById('updateAccountbtn');
+           updateAccountBtn.addEventListener('click', () => {
+             updateAccount(); // Call the updateAccount function when the button is clicked
+ 
+             // Disable form elements except the "Edit Account" button
+             const uploadBtn = document.getElementById('upload-btn');
+             const fullNameInput = document.getElementById('full-name');
+             const emailInput = document.getElementById('email');
+             const passwordInput = document.getElementById('password');
+             const editAccountBtn = document.getElementById('editAccountbtn');
+             const imageInput = document.getElementById('image-input');
+ 
+             fullNameInput.disabled = true;
+             emailInput.disabled = true;
+             passwordInput.disabled = true;
+             uploadBtn.disabled = true;
+             updateAccountBtn.disabled = true;
+             // editAccountBtn.disabled = false;
+             imageInput.disabled = true;
+ 
+             // Remove hover effect for disabled buttons
+             editAccountBtn.classList.remove('no-hover');
+             uploadBtn.classList.add('no-hover');
+             updateAccountBtn.classList.add('no-hover');
+           });
+ 
+    // Event listener for showing the logoutModal
+    logoutModalz.addEventListener('click', showLogoutModal);
+
+     // Event listener for the close button in the modal
+    closeModalz.addEventListener('click', closeLogoutModal);
+
+    // Event listener for the "Log Out" button in the modal
+    confirmLogout.addEventListener('click', () => {
+      // Add logout functionality here (e.g., clear session data, redirect to login page, etc.)
+    console.log('Logging out...');
+
+      // Close the modal after logout
+      closeLogoutModal();
+    });
+    
+  }
 });
 
+// File Upload
 document.addEventListener('DOMContentLoaded', function () {
-  // Get elements
-  const profileImage = document.getElementById('profile-img');
+  const profileImage = document.getElementById('profile-image');
   const uploadBtn = document.getElementById('upload-btn');
 
   // Add event listener to the "Upload Image" button
@@ -383,7 +600,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to send the image to the backend
     async function sendImageToBackend(file) {
       const SignupformDatas = new FormData();
-      SignupformDatas.append('profileImage', file);
+      SignupformDatas.append('profile-image', file);
 
       try {
         const response = await fetch('/api/profile/upload', {
@@ -397,8 +614,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             
-        // Store the image data in local storage
-        localStorage.setItem('profileImage', profileImage.src);
+        // // Store the image data in local storage
+        // localStorage.setItem('profileImage', profileImage.src);
  
       } catch (error) {
         console.error('Error uploading image:', error);
@@ -406,42 +623,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  document.addEventListener('DOMContentLoaded', async function () {
-    try {
-      // Make a POST request to the /login endpoint to fetch user data
-      const response = await fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          // Your login credentials data here, if required
-          // loginEmail: 'user@example.com',
-          // loginPassword: 'password'
   
-        })
-      });
   
-      const data = await response.json();
-      console.log(data)
   
-      if (data.user) {
-        // Populate the email and name fields with the user data
-        const fullNameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
 
-        // Populate the user data in the HTML
-        fullNameInput.textContent = data.user.name || '';
-        emailInput.textContent = data.user.email || '';
   
-        // fullNameInput.value = data.user.name || '';
-        // emailInput.value = data.user.email || '';
-      } else {
-        console.error('User data not found in the response');
-      }
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  });
-  
- 

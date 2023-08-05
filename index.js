@@ -68,8 +68,14 @@ const storage = multer.diskStorage({
     cb(null, 'profile_image-' + uniqueSuffix + fileExtension);
   }
 });
+// const upload = multer({ storage: storage });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10 MB
+  },
+});
 
 
 // Connect to MongoDB (replace 'YOUR_MONGODB_URI' with your actual MongoDB connection URI)
@@ -212,6 +218,7 @@ app.post("/login", (request, response)=> {
                 // Set the user as logged in by setting the session property
                 request.session.user = res;
                 request.session.isLoggedIn = true;
+               
                 console.log("Login Successful!");
                 response.redirect("/loginsuccess.html");
               } else {
@@ -339,27 +346,27 @@ app.put('/api/profile/update', isAuthenticated, async (req, res) => {
 
 
 // API endpoint to handle image upload
-app.post('/api/profile/upload', isAuthenticated, upload.single('profileImage'), async (req, res) => {
+app.post('/api/profile/upload', isAuthenticated, upload.single('profile-image'), async (req, res) => {
   const loginEmail = req.session.user.email; // Access email from the session
 
   try {
     // Check if the image was uploaded
     if (req.file) {
       // Save the image path to the user data
-      const imagePath = '/uploads/' + req.file.filename;
+      const imagePath = 'uploads/' + req.file.filename;
       // Read the image file and get its data and content type
-      const imageFile = fs.readFileSync(req.file.path);
+      const imageFile = fs.readFileSync('./public/uploads/' + req.file.filename);
       const imageBufferData = imageFile.toString('base64');
       const imageContentType = req.file.mimetype;
 
       // Update the user data in the database with the new image path
       await db.collection('signupformdatas').updateOne(
         { email: loginEmail },
-        { image: { imagePath }}
+        { $set: { image: { imagePath, data: imageBufferData, contentType: imageContentType } } }
       );
 
-      // Delete the temporary image file after updating the data in the database
-      fs.unlinkSync(req.file.path);
+      // // Delete the temporary image file after updating the data in the database
+      // fs.unlinkSync(req.file.path);
 
 
       res.status(200).json({ message: 'Image uploaded successfully.' });
@@ -372,27 +379,40 @@ app.post('/api/profile/upload', isAuthenticated, upload.single('profileImage'), 
   }
 });
 
-// Route to fetch the profile image for the user
-// app.get('/api/profile/profileImage', isAuthenticated, async (req, res) => {
-//   try {
-//     const loginEmail = req.session.user.email;
-//     // Query the database to find the user with the given loginEmail
-//     const user = await db.collection('signupformdatas').findOne({ email: loginEmail });
+app.get('/profile-image', isAuthenticated, async (req, res) => {
+  try {
+    const loginEmail = req.session.user.email;
 
-//     if (user && user.image) {
-//       // If the user and the profile image are found, send the image data as a response
-//       const imageBuffer = Buffer.from(user.image.data, 'base64'); // Convert the base64 image data to a buffer
-//       res.set('Content-Type', user.image.contentType); // Set the content type of the response to the image's content type
-//       res.send(imageBuffer);
-//       console.log(imageBuffer) // Send the image buffer directly as the response
-//     } else {
-//       // If the user or the profile image is not found, send an error response
-//       res.status(404).json({ error: 'User or profile image not found.' });
-//     }
-//   } catch (error) {
-//     console.error('Error fetching profile image:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
+    if (!loginEmail) {
+      return res.status(401).send('Unauthorized');
+    }
+
+    // Find the user's profile image from the database
+    // Find the user by email
+    const user = await db.collection('signupformdatas').findOne({ email: loginEmail });
+
+    if (!user) {
+      console.log('User not found in the database.');
+      return res.status(404).send('User not found.');
+    }
+
+    if (user.image && user.image.imagePath) {
+      console.log('User has an uploaded profile image.');
+      res.json({ user: user.image.imagePath });
+    } else {
+      console.log('User has not uploaded a profile image.');
+      // If the user does not have an uploaded profile image, serve the default image
+      // If the user does not have an uploaded profile image, serve the default image
+      // const defaultImagePath = path.join(__dirname, 'public', 'uploads', 'blank man.jpg');
+      // res.json(defaultImagePath);
+      const imgurImageUrl = 'https://i.imgur.com/r79g1jQ.jpg'; // Replace this with the actual Imgur image address you obtained
+      res.redirect(imgurImageUrl); // Redirect the request to the Imgur 
+
+    }
+  } catch (error) {
+    console.error('Error fetching profile image:', error);
+    res.status(500).send('Error fetching profile image: ' + error);
+  }
+});
 
 
