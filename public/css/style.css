@@ -1321,4 +1321,7 @@ section{
       right: -200%;
       }
    
+   .dashboard h3 {
+      font-size: 2rem;
+   }
 }
