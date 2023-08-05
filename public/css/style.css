@@ -1177,6 +1177,8 @@ section{
  #dashboard .promoImage {
    display: flex;
    justify-content: center;
+   max-width: 100%; /* Scale the image to fit the container's width */
+   height: auto; /* Maintain the aspect ratio */
  }
 
 /* media queries  */
