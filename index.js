@@ -416,3 +416,24 @@ app.get('/profile-image', isAuthenticated, async (req, res) => {
 });
 
 
+app.get('/bookingdata', isAuthenticated, async (req, res) => {
+  try {
+    const loginEmail = req.session.user.email
+
+    if (!loginEmail) {
+      return res.status(401).send('Unauthorized');
+    }
+
+    // Find the user by email
+    const user = await db.collection('signupformdatas').findOne({ email: loginEmail });
+  
+     // Find all the booking data related to the user
+    const bookingData = await db.collection('formdatas').find({ email: loginEmail }).toArray();
+
+    // Send the bookingData as a JSON response to the client
+    res.json({ bookingData });
+ } catch (error) {
+   console.error('Error fetching booking data:', error);
+   return res.status(500).send('Internal Server Error');
+ }
+});

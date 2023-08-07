@@ -11,47 +11,47 @@ window.onscroll = () =>{
    navbar.classList.remove('active');
 };
 
+ // Fetch booking data from the server
+ fetch('/bookingdata')
+ .then(response => response.json())
+ .then(data => {
+   // Handle the fetched data and update the HTML content
+   const bookingData = data.bookingData;
+   const upcomingBookings = document.getElementById('upcomingTripsList');
+   const recentBookings = document.getElementById('recentBookingsList');
+   const currentDate = new Date();
+  
 
-// Sample data for upcoming trips and recent bookings
-const upcomingTrips = [
-    "Trip to Cebu - August 2023",
-    "Beach vacation in Palawan - September 2023",
-    "Coral Reef Adventure in Tubattaha - October 2023",
-  ];
-  
-  const recentBookings = [
-    "Hotel in Cebu - July 2023",
-    "Resort in Siargao - July 2023",
-    "Tour package to El Nido - June 2023",
-  ];
-  
-  // Function to populate the upcoming trips list
-  function populateUpcomingTrips() {
-    const upcomingTripsList = document.getElementById("upcomingTripsList");
-    upcomingTrips.forEach((trip) => {
-      const li = document.createElement("li");
-      li.textContent = trip;
-      upcomingTripsList.appendChild(li);
-    });
-  }
-  
-  // Function to populate the recent bookings list
-  function populateRecentBookings() {
-    const recentBookingsList = document.getElementById("recentBookingsList");
-    recentBookings.forEach((booking) => {
-      const li = document.createElement("li");
-      li.textContent = booking;
-      recentBookingsList.appendChild(li);
-    });
-  }
-  
-  // Call the functions to populate the lists on page load
-  document.addEventListener("DOMContentLoaded", () => {
-    populateUpcomingTrips();
-    populateRecentBookings();
-  });
-
-
+   if (bookingData && bookingData.length > 0) {
+     bookingData.forEach(booking => {
+       const listItem = document.createElement('li');
+       listItem.innerHTML = `
+         <p>Name: ${booking.name}</p>
+         <p>Email: ${booking.email}</p>
+         <p>Phone: ${booking.phone}</p>
+         <p>Address: ${booking.address}</p>
+         <p>Location: ${booking.location}</p>
+         <p>Arrival: ${booking.arrival}</p>
+         <p>Departure: ${booking.departure}</p>
+         <!-- Display other booking data as needed -->
+       `;
+       // Check if the booking date is past the current date
+       if (new Date(booking.arrival) < currentDate) {
+        recentBookings.appendChild(listItem);
+      } else {
+        upcomingBookings.appendChild(listItem);
+      }
+      //  bookingList.appendChild(listItem);
+     });
+   } else {
+     const listItem = document.createElement('li');
+     listItem.textContent = 'No booking data found.';
+     upcomingBookings.appendChild(listItem);
+     upcomingBookings.appendChild(listItem);
+     recentBookings.appendChild(listItem.cloneNode(true));
+   }
+ })
+ .catch(error => console.error('Error fetching data:', error));
 
 // Close the sign-up modal when the close button is clicked
 document.getElementById("close-button").addEventListener("click", function() {
