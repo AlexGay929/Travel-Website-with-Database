@@ -67,93 +67,6 @@ ScrollReveal().reveal('.about, .reviews, .home-offer, .home-packages, .home-abou
 ScrollReveal().reveal('.partner, .services, .heading', { origin: 'left' });
 ScrollReveal().reveal('.tables, .about-content', { origin: 'right' });
 
-
-// Open the sign-up modal when the sign-up button is clicked
-document.getElementById("signupButton").addEventListener("click", function() {
-   document.getElementById("signup-modal").style.display = "block";
- });
- 
- // Close the sign-up modal when the close button is clicked
- document.getElementById("close-button").addEventListener("click", function() {
-   document.getElementById("signup-modal").style.display = "none";
- });
-
-// Check login status when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-  checkLoginStatus();
-});
-
- 
-
-// Function to show the login modal
-function openModal() {
-  const loginModal = document.getElementById("login-modal");
-  loginModal.style.display = "block";
-}
-
-// Function to close the login modal
-function closeModal() {
-  const loginModal = document.getElementById("login-modal");
-  loginModal.style.display = "none";
-}
-
-// Add event listeners for the login modal
-document.getElementById('loginButton').addEventListener('click', openModal);
-document.getElementById('loginclose-button').addEventListener('click', closeModal);
-
-
-
-  const logoutModalz = document.getElementById('logoutModal');
-  const closeModalz = document.getElementById('logoutModal');
-  const confirmLogout = document.getElementById('confirmLogout');
-
- // Function to show the logout modal
- function showLogoutModal() {
-  logoutModalz.style.display = 'block';
- }
-
- // Function to close the logout modal
- function closeLogoutModal() {
-   logoutModalz.style.display = 'none';
- }
-
- // Event listener for showing the logoutModal
- logoutModalz.addEventListener('click', showLogoutModal);
-
-
- // Event listener for the close button in the modal
- closeModalz.addEventListener('click', closeLogoutModal);
-
- // Event listener for the "Log Out" button in the modal
- confirmLogout.addEventListener('click', () => {
-   // Add logout functionality here (e.g., clear session data, redirect to login page, etc.)
-  console.log('Logging out...');
-
-   // Close the modal after logout
-   closeLogoutModal();
- });
-
-// declared outside for better functionality
-const fetchProfileImage = async () => {
-  try {
-    // Fetch the profile image URL from the server
-    const response = await fetch('/profile-image');
-    const responseData = await response.json();
-
-    if (response.ok) {
-      const imageUrl = responseData.user;
-      
-      return imageUrl; // Return the fetched image data
-    } else if (response.status === 401) {
-      return null; // User is not logged in, return null for no image data
-    } else {
-      throw new Error('Failed to fetch profile image URL');
-    }
-  } catch (error) {
-    console.error('Error fetching profile image:', error);
-    throw error; // Re-throw the error to handle it in the caller function
-  }
-}
 // Define the UIHandler object outside the DOMContentLoaded event listener
 const UIHandler = {
   showLoggedInUI: async function() {
@@ -296,6 +209,27 @@ const UIHandler = {
   }
 };
 
+// declared outside for better functionality
+const fetchProfileImage = async () => {
+  try {
+    // Fetch the profile image URL from the server
+    const response = await fetch('/profile-image');
+    const responseData = await response.json();
+
+    if (response.ok) {
+      const imageUrl = responseData.user;
+      
+      return imageUrl; // Return the fetched image data
+    } else if (response.status === 401) {
+      return null; // User is not logged in, return null for no image data
+    } else {
+      throw new Error('Failed to fetch profile image URL');
+    }
+  } catch (error) {
+    console.error('Error fetching profile image:', error);
+    throw error; // Re-throw the error to handle it in the caller function
+  }
+}
 
 // client.js
 async function checkLoginStatus() {
@@ -320,7 +254,259 @@ async function checkLoginStatus() {
 
 document.addEventListener('DOMContentLoaded', () => {
   checkLoginStatus();
+  const packageModal1 = document.querySelector('.packageModal1');
+  packageModal1.style.display = 'none'; 
+  const packageModal2 = document.querySelector('.packageModal2');
+  packageModal2.style.display = 'none'; 
+  const packageModal3 = document.querySelector('.packageModal3');
+  packageModal3.style.display = 'none'; 
+  const packageModal4 = document.querySelector('.packageModal4');
+  packageModal4.style.display = 'none'; 
+  const packageModal5 = document.querySelector('.packageModal5');
+  packageModal5.style.display = 'none'; 
+  const packageModal6 = document.querySelector('.packageModal6');
+  packageModal6.style.display = 'none'; 
+  const packageModal7 = document.querySelector('.packageModal7');
+  packageModal7.style.display = 'none';
+  const packageModal8 = document.querySelector('.packageModal8');
+  packageModal8.style.display = 'none';
+  const packageModal9 = document.querySelector('.packageModal9');
+  packageModal9.style.display = 'none';
+  const packageModal10 = document.querySelector('.packageModal10');
+  packageModal10.style.display = 'none';
+  const packageModal11 = document.querySelector('.packageModal11');
+  packageModal11.style.display = 'none';
+  const packageModal12 = document.querySelector('.packageModal12');
+  packageModal12.style.display = 'none';
 });
+
+// Open the sign-up modal when the sign-up button is clicked
+document.getElementById("signupButton").addEventListener("click", function() {
+  document.getElementById("signup-modal").style.display = "block";
+});
+
+// Close the sign-up modal when the close button is clicked
+document.getElementById("close-button").addEventListener("click", function() {
+  document.getElementById("signup-modal").style.display = "none";
+});
+
+// Check login status when the page loads
+// document.addEventListener('DOMContentLoaded', () => {
+//   checkLoginStatus();
+  
+// });
+
+// Function to show the login modal
+function openModal() {
+ const loginModal = document.getElementById("login-modal");
+ loginModal.style.display = "block";
+}
+
+// Function to close the login modal
+function closeModal() {
+ const loginModal = document.getElementById("login-modal");
+ loginModal.style.display = "none";
+}
+
+// Add event listeners for the login modal
+document.getElementById('loginButton').addEventListener('click', openModal);
+document.getElementById('loginclose-button').addEventListener('click', closeModal);
+
+
+
+ const logoutModalz = document.getElementById('logoutModal');
+ const closeModalz = document.getElementById('logoutModal');
+ const confirmLogout = document.getElementById('confirmLogout');
+
+// Function to show the logout modal
+function showLogoutModal() {
+ logoutModalz.style.display = 'block';
+}
+
+// Function to close the logout modal
+function closeLogoutModal() {
+  logoutModalz.style.display = 'none';
+}
+
+// Event listener for showing the logoutModal
+logoutModalz.addEventListener('click', showLogoutModal);
+
+
+// Event listener for the close button in the modal
+closeModalz.addEventListener('click', closeLogoutModal);
+
+// Event listener for the "Log Out" button in the modal
+confirmLogout.addEventListener('click', () => {
+  // Add logout functionality here (e.g., clear session data, redirect to login page, etc.)
+ console.log('Logging out...');
+
+  // Close the modal after logout
+  closeLogoutModal();
+});
+
+
+// const readMoreBtn = document.getElementById('readMorebtn');
+const packageModal1 = document.querySelector('.packageModal1');
+const packageModal2 = document.querySelector('.packageModal2');
+const packageModal3 = document.querySelector('.packageModal3');
+const packageModal4 = document.querySelector('.packageModal4');
+const packageModal5 = document.querySelector('.packageModal5');
+const packageModal6 = document.querySelector('.packageModal6');
+const packageModal7 = document.querySelector('.packageModal7');
+const packageModal8 = document.querySelector('.packageModal8');
+const packageModal9 = document.querySelector('.packageModal9');
+const packageModal10 = document.querySelector('.packageModal10');
+const packageModal11 = document.querySelector('.packageModal11');
+const packageModal12 = document.querySelector('.packageModal12');
+const boracayModal = document.getElementById('boracayModal');
+const cebuModal = document.getElementById('cebuModal');
+const elnidoModal = document.getElementById('elnidoModal');
+const puertogaleraModal = document.getElementById('puertogaleraModal');
+const puertoprincesaModal = document.getElementById('puertoprincesaModal');
+const siargaoModal = document.getElementById('siargaoModal');
+const tagaytayModal = document.getElementById('tagaytayModal');
+const tubbatahaModal = document.getElementById('tubbatahaModal');
+const viganModal = document.getElementById('viganModal');
+const davaoModal = document.getElementById('davaoModal');
+const coronModal = document.getElementById('coronModal');
+const camiguinModal = document.getElementById('camiguinModal');
+const bookNowBtn = document.querySelector('.bookNow');
+const boracayReadMoreBtn = document.getElementById('boracayReadMorebtn');
+const cebuReadMoreBtn = document.getElementById('cebuReadMorebtn');
+const elnidoReadMoreBtn = document.getElementById('elnidoReadMorebtn');
+const puertogaleraReadMoreBtn = document.getElementById('puertogaleraReadMorebtn');
+const puertoprincesaReadMoreBtn = document.getElementById('puertoprincesaReadMorebtn');
+const siargaoReadMoreBtn = document.getElementById('siargaoReadMorebtn');
+const tagaytayReadMoreBtn = document.getElementById('tagaytayReadMorebtn');
+const tubbatahaReadMoreBtn = document.getElementById('tubbatahaReadMorebtn');
+const viganReadMoreBtn = document.getElementById('viganReadMorebtn');
+const davaoReadMoreBtn = document.getElementById('davaoReadMorebtn');
+const coronReadMoreBtn = document.getElementById('coronReadMorebtn');
+const camiguinReadMoreBtn = document.getElementById('camiguinReadMorebtn');
+// ... Other code ...
+
+boracayReadMoreBtn.addEventListener('click', () => {
+  boracayModal.style.display = 'block';
+});
+
+cebuReadMoreBtn.addEventListener('click', () => {
+  cebuModal.style.display = 'block';
+});
+
+elnidoReadMoreBtn.addEventListener('click', () => {
+  elnidoModal.style.display = 'block';
+});
+
+puertogaleraReadMoreBtn.addEventListener('click', () => {
+  puertogaleraModal.style.display = 'block';
+});
+
+puertoprincesaReadMoreBtn.addEventListener('click', () => {
+  puertoprincesaModal.style.display = 'block';
+})
+
+siargaoReadMoreBtn.addEventListener('click', () => {
+  siargaoModal.style.display = 'block';
+})
+
+tagaytayReadMoreBtn.addEventListener('click', () => {
+  tagaytayModal.style.display = 'block';
+})
+
+tubbatahaReadMoreBtn.addEventListener('click', () => {
+  tubbatahaModal.style.display = 'block';
+})
+
+viganReadMoreBtn.addEventListener('click', () => {
+  viganModal.style.display = 'block';
+})
+
+davaoReadMoreBtn.addEventListener('click', () => {
+  davaoModal.style.display = 'block';
+})
+
+coronReadMoreBtn.addEventListener('click', () => {
+  coronModal.style.display = 'block';
+})
+
+camiguinReadMoreBtn.addEventListener('click', () => {
+  camiguinModal.style.display = 'block';
+})
+
+
+
+packageModal1.addEventListener('click', (event) => {
+  if (event.target === packageModal1) {
+    packageModal1.style.display = 'none';
+  }
+});
+
+packageModal2.addEventListener('click', (event) => {
+  if (event.target === packageModal2) {
+    packageModal2.style.display = 'none';
+  }
+});
+
+packageModal3.addEventListener('click', (event) => {
+  if (event.target === packageModal3) {
+    packageModal3.style.display = 'none';
+  }
+});
+
+packageModal4.addEventListener('click', (event) => {
+  if (event.target === packageModal4) {
+    packageModal4.style.display = 'none';
+  }
+});
+
+packageModal5.addEventListener('click', (event) => {
+  if (event.target === packageModal5) {
+    packageModal5.style.display = 'none';
+  }
+});
+
+packageModal6.addEventListener('click', (event) => {
+  if (event.target === packageModal6) {
+    packageModal6.style.display = 'none';
+  }
+})
+
+packageModal7.addEventListener('click', (event) => {
+  if (event.target === packageModal7) {
+    packageModal7.style.display = 'none';
+  }
+})
+
+packageModal8.addEventListener('click', (event) => {
+  if (event.target === packageModal8) {
+    packageModal8.style.display = 'none';
+  }
+})
+
+packageModal9.addEventListener('click', (event) => {
+  if (event.target === packageModal9) {
+    packageModal9.style.display = 'none';
+  }
+})
+
+packageModal10.addEventListener('click', (event) => {
+  if (event.target === packageModal10) {
+    packageModal10.style.display = 'none';
+  }
+})
+
+packageModal11.addEventListener('click', (event) => {
+  if (event.target === packageModal11) {
+    packageModal11.style.display = 'none';
+  }
+})
+
+packageModal12.addEventListener('click', (event) => {
+  if (event.target === packageModal12) {
+    packageModal12.style.display = 'none';
+  }
+})
+
 
 
 // DOMContent Loaded fetch Profile and ShowLoggedinUI

@@ -97,6 +97,7 @@ const Form1Schema = new mongoose.Schema({
     address : String,
     location : String,
     guests : Number,
+    tourpackage : String,
     arrival : String,
     departure : String,
     // Add other fields as needed for Form Datas
@@ -129,6 +130,7 @@ const Form1Schema = new mongoose.Schema({
          var address = req.body.address;
          var location = req.body.location;
          var guests = req.body.guests;
+         var tourpackage = req.body.tourpackage;
          var arrival = req.body.arrival;
          var departure = req.body.departure;
     
@@ -139,6 +141,7 @@ const Form1Schema = new mongoose.Schema({
             "address" : address,
              "location" : location,
              "guests" : guests,
+             "tourpackage" : tourpackage,
              "arrival" : arrival,
              "departure" : departure
          }
@@ -162,6 +165,11 @@ const Form1Schema = new mongoose.Schema({
          var signupFullname = req.body.signupFullname;
          var signupEmail = req.body.signupEmail;
          var signupPassword = req.body.signupPassword;
+
+         if (!isValidGmail(signupEmail)) {
+          return res.status(400).send("Invalid email address. Only Gmail addresses are allowed.");
+      }
+  
     
          var data = {
              "name" : signupFullname,
@@ -177,6 +185,11 @@ const Form1Schema = new mongoose.Schema({
         
              return res.redirect('/signupsuccess.html')
         });
+
+        function isValidGmail(email) {
+          const pattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+          return pattern.test(email);
+      }
 
    app.get("/", (req, res)=> {
      res.set({

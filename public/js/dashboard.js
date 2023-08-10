@@ -27,10 +27,9 @@ window.onscroll = () =>{
        const listItem = document.createElement('li');
        listItem.innerHTML = `
          <p>Name: ${booking.name}</p>
-         <p>Email: ${booking.email}</p>
-         <p>Phone: ${booking.phone}</p>
-         <p>Address: ${booking.address}</p>
          <p>Location: ${booking.location}</p>
+         <p>Guests: ${booking.guests}</p>
+         <p>Tour Package: ${booking.tourpackage}</p>
          <p>Arrival: ${booking.arrival}</p>
          <p>Departure: ${booking.departure}</p>
          <!-- Display other booking data as needed -->
