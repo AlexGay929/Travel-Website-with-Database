@@ -415,12 +415,8 @@ app.get('/profile-image', isAuthenticated, async (req, res) => {
     } else {
       console.log('User has not uploaded a profile image.');
       // If the user does not have an uploaded profile image, serve the default image
-      // If the user does not have an uploaded profile image, serve the default image
-      // const defaultImagePath = path.join(__dirname, 'public', 'uploads', 'blank man.jpg');
-      // res.json(defaultImagePath);
-      const imgurImageUrl = 'https://i.imgur.com/r79g1jQ.jpg'; // Replace this with the actual Imgur image address you obtained
-      res.redirect(imgurImageUrl); // Redirect the request to the Imgur 
-
+      const imgurImageUrl = 'https://i.imgur.com/r79g1jQ.jpg'; 
+      res.redirect(imgurImageUrl); 
     }
   } catch (error) {
     console.error('Error fetching profile image:', error);

@@ -76,9 +76,8 @@ document.getElementById('loginclose-button').addEventListener('click', closeModa
 
 // logoutModal
 const logoutModalz = document.getElementById('logoutModal');
-const closeModalz = document.getElementById('closelogoutModal');
+const closeModalz = document.getElementById('logoutModal');
 const confirmLogout = document.getElementById('confirmLogout');
-const cancelLogout = document.getElementById('cancelLogout');
 
 // Function to show the logout modal
 function showLogoutModal() {
@@ -89,6 +88,9 @@ function showLogoutModal() {
 function closeLogoutModal() {
   logoutModalz.style.display = 'none';
 }
+
+ // Event listener for showing the logoutModal
+ logoutModalz.addEventListener('click', showLogoutModal);
 
 // Event listener for the close button in the modal
 closeModalz.addEventListener('click', closeLogoutModal);

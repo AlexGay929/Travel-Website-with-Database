@@ -153,6 +153,17 @@ section{
    display: none;
 }
 
+.header #signupButton, .header #loginButton {
+   border: 1px solid var(--main-color);
+   border-radius: 5%;
+   padding: 3px;
+   background-color: var(--main-color);
+   color: var(--tomato);
+}
+.header #signupButton:hover, .header #loginButton:hover {
+   color: var(--white);
+}
+
 /* Styling for the Sign Up Modal */
 .signup-modal {
    display: none;
@@ -172,6 +183,13 @@ section{
    border-radius: 5px;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
  }
+
+ .signup-modal .modal-content img {
+   display: block;
+   width: 100px;
+   margin: 0 auto;
+ }
+ 
 
  #signupForm p {
    text-align: center;
@@ -252,6 +270,12 @@ section{
    border-radius: 5px;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
  }
+
+ .login-modal .modal-content img {
+   display: block;
+   width: 100px;
+   margin: 0 auto;
+ }
  
  #loginForm p {
    text-align: center;
@@ -331,7 +355,7 @@ section{
  }
  
  .logoutModal .modal-content {
-   background-color: #f2f2f2;
+   background-color: var(--white);
    margin: 15% auto;
    padding: 20px;
    border: 1px solid #888;
@@ -341,9 +365,8 @@ section{
 
  .logoutModal .modal-content img {
    display: block;
-   width: 150px;
+   width: 100px;
    margin: 0 auto;
-   background-color: var(--light-bg);
  }
  
  .logoutModal .close {
@@ -402,6 +425,7 @@ section{
    background-color: var(--white);
    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
    min-width: 125px;
+   padding: 10px;
  }
 
   .dropdown-menu li {
@@ -410,7 +434,6 @@ section{
  }
 
   .dropdown-menu a:hover {
-   /* background-color: var(--light-black); */
    color: var(--tomato);
  }
  
@@ -752,20 +775,6 @@ section{
    background: var(--white);
 }
 
-/* .packages .box-container .box:nth-child(1),
-.packages .box-container .box:nth-child(2),
-.packages .box-container .box:nth-child(3),
-.packages .box-container .box:nth-child(4),
-.packages .box-container .box:nth-child(5),
-.packages .box-container .box:nth-child(6),
-.packages .box-container .box:nth-child(7),
-.packages .box-container .box:nth-child(8),
-.packages .box-container .box:nth-child(9),
-.packages .box-container .box:nth-child(10),
-.packages .box-container .box:nth-child(11),
-.packages .box-container .box:nth-child(12){
-   display: inline-block;
-} */
 
 .packages .box-container .box:hover .image img{
    transform: scale(1.1);
@@ -825,10 +834,12 @@ section{
  
  .packageModalContent {
    background-color: #fff;
+   margin: 15% auto;
    padding: 20px;
-   border-radius: 5px;
+   border-radius: 10px;
+   border: 2px solid var(--main-color);
    width: 80%;
-   max-width: 900px;
+   max-width: 700px;
    position: absolute; 
    top: 50%; 
    left: 50%;
@@ -1030,10 +1041,14 @@ section{
  .sc-btn {
    padding: 12px 20px;
    border-radius: 5px;
-   background: var(--tomato);
+   background: var(--main-color);
    color: var(--white);
    font-size: 1.5rem;
    font-weight: 500;
+ }
+
+ .sc-btn:hover {
+   background-color: var(--tomato);
  }
 
  /* signup css */
@@ -1069,7 +1084,7 @@ section{
  .signup-container a {
    display: inline-block;
    margin-top: 20px;
-   background-color: var(--tomato);
+   background-color: var(--main-color);
    color: var(--white);
    font-size: 1.5rem;
    text-decoration: none;
@@ -1080,7 +1095,7 @@ section{
  }
  
  .signup-container a:hover {
-   background-color: var(--main-color);
+   background-color: var(--tomato);
    color: #fff;
  }
 
@@ -1095,7 +1110,7 @@ section{
    max-width: 600px;
    margin: 20px auto;
    background-color: #fff;
-   border: 1px solid #ddd;
+   border: 1px solid var(--main-color);
    border-radius: 8px;
    padding: 20px;
  }
@@ -1162,26 +1177,6 @@ section{
    margin-bottom: 10px;
  }
  
- /* Wishlist */
- .profile-container .profile-info h2 {
-   margin-top: 10px;
- }
-
- .profile-container .wishlist {
-   list-style: decimal;
-   margin: 10px 12px;
- }
- 
- .profile-container .wishlist li {
-   font-size: 16px;
-   margin-bottom: 5px;
- }
- 
- /* Notes */
- .profile-container .notes {
-   font-size: 16px;
-   margin-bottom: 20px;
- }
  
  /* Buttons */
  .profile-container .edit-account-btn,.profile-container .update-account-btn {
@@ -1230,7 +1225,7 @@ section{
  
  .upcoming-trips, .recent-bookings {
    width: 45%;
-   border: 1px solid #ccc;
+   border: 1px solid var(--main-color);
    padding: 20px;
    border-radius: 5px;
    text-align: center;
@@ -1244,7 +1239,7 @@ section{
  }
  
  .dashboard li {
-   margin-bottom: 10px;
+   margin-bottom: 20px;
  }
 
  #dashboard .promoImage {

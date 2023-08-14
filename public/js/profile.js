@@ -42,7 +42,6 @@ document.getElementById('loginclose-button').addEventListener('click', closeModa
 const logoutModalz = document.getElementById('logoutModal');
 const closeModalz = document.getElementById('logoutModal');
 const confirmLogout = document.getElementById('confirmLogout');
-const cancelLogout = document.getElementById('cancelLogout');
 
 // Function to show the logout modal
 function showLogoutModal() {
@@ -53,6 +52,9 @@ function showLogoutModal() {
 function closeLogoutModal() {
   logoutModalz.style.display = 'none';
 }
+
+ // Event listener for showing the logoutModal
+ logoutModalz.addEventListener('click', showLogoutModal);
 
 // Event listener for the close button in the modal
 closeModalz.addEventListener('click', closeLogoutModal);
@@ -441,13 +443,27 @@ document.addEventListener('DOMContentLoaded', async function () {
             passwordInput.disabled = true;
             uploadBtn.disabled = true;
             updateAccountBtn.disabled = true;
-            // editAccountBtn.disabled = false;
             imageInput.disabled = true;
 
             // Remove hover effect for disabled buttons
             editAccountBtn.classList.remove('no-hover');
             uploadBtn.classList.add('no-hover');
             updateAccountBtn.classList.add('no-hover');
+          });
+ 
+                    // Event listener for showing the logoutModal
+          logoutModalz.addEventListener('click', showLogoutModal);
+
+            // Event listener for the close button in the modal
+          closeModalz.addEventListener('click', closeLogoutModal);
+
+          // Event listener for the "Log Out" button in the modal
+          confirmLogout.addEventListener('click', () => {
+            // Add logout functionality here (e.g., clear session data, redirect to login page, etc.)
+          console.log('Logging out...');
+
+            // Close the modal after logout
+            closeLogoutModal();
           });
       } else {
         // If there's no profile image, display the profile settings without the image
