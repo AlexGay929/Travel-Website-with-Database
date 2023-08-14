@@ -154,14 +154,15 @@ section{
 }
 
 .header #signupButton, .header #loginButton {
-   border: 1px solid var(--main-color);
-   border-radius: 5%;
-   padding: 3px;
-   background-color: var(--main-color);
-   color: var(--tomato);
+   border: 1px solid var(--tomato);
+   border-radius: 8.5px;
+   padding: 5px;
+   background-color: var(--white);
+   color: var(--main-color);
 }
 .header #signupButton:hover, .header #loginButton:hover {
-   color: var(--white);
+   color: var(--tomato);
+   background-color: var(--main-color);
 }
 
 /* Styling for the Sign Up Modal */
