@@ -360,27 +360,22 @@ app.put('/api/profile/update', isAuthenticated, async (req, res) => {
 
 // API endpoint to handle image upload
 app.post('/api/profile/upload', isAuthenticated, upload.single('profile-image'), async (req, res) => {
-  const loginEmail = req.session.user.email; // Access email from the session
+  const loginEmail = req.session.user.email; 
 
   try {
-    // Check if the image was uploaded
     if (req.file) {
-      // Save the image path to the user data
+
       const imagePath = 'uploads/' + req.file.filename;
+
       // Read the image file and get its data and content type
       const imageFile = fs.readFileSync('./public/uploads/' + req.file.filename);
       const imageBufferData = imageFile.toString('base64');
       const imageContentType = req.file.mimetype;
 
-      // Update the user data in the database with the new image path
       await db.collection('signupformdatas').updateOne(
         { email: loginEmail },
         { $set: { image: { imagePath, data: imageBufferData, contentType: imageContentType } } }
       );
-
-      // // Delete the temporary image file after updating the data in the database
-      // fs.unlinkSync(req.file.path);
-
 
       res.status(200).json({ message: 'Image uploaded successfully.' });
     } else {
@@ -401,7 +396,6 @@ app.get('/profile-image', isAuthenticated, async (req, res) => {
     }
 
     // Find the user's profile image from the database
-    // Find the user by email
     const user = await db.collection('signupformdatas').findOne({ email: loginEmail });
 
     if (!user) {
